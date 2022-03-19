@@ -1,5 +1,7 @@
 package com.company;
 
+import com.company.consoleui.ConsoleUI;
+
 import java.awt.*;
 import java.nio.channels.Pipe;
 import java.util.*;
@@ -11,9 +13,10 @@ public class Main {
 
     public static void main(String[] args) {
 
-        Game game = new Game(1);
-        game.gameLoop();
 
+    ConsoleUI ui = new ConsoleUI(1);
+
+    ui.play();
     }
 
 

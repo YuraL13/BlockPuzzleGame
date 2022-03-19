@@ -1,5 +1,9 @@
 package com.company;
 
+import com.company.core.Field;
+import com.company.core.Level;
+import com.company.core.Piece;
+
 import java.awt.*;
 import java.util.Arrays;
 import java.util.List;
@@ -9,10 +13,9 @@ import java.util.regex.Pattern;
 
 public class Game {
 
-    //TODO: Remake Game to CobsoleUI
+    //TODO: Remake Game to ConsoleUI
     //No game logic in this class
     //Split into folders
-
 
     private Level level;
 
@@ -61,10 +64,10 @@ public class Game {
         }
     }
 
-    public void printPieces(List<Point[]> levelPieces){
+    public void printPieces(List<Piece> levelPieces){
         for (int i = 0; i < levelPieces.size(); i++) {
             System.out.println(i + 1 + ".");
-            printPiece(levelPieces.get(i));
+            printPiece(levelPieces.get(i).getPiece());
             System.out.print("\n--------------\n");
         }
     }
@@ -81,9 +84,9 @@ public class Game {
         return true;
     }
 
-    public static void makeMove(Point[] piece, Field f, int x, int y, int c){
+    public static void makeMove(Piece piece, Field f, int x, int y, int c){
 
-        var move = f.putPiece(piece, x, y, c);
+        var move = f.putPiece(piece.getPiece(), x, y, c);
 
         if(move) {
             f.printField();
