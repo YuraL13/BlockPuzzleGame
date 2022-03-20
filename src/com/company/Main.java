@@ -17,6 +17,7 @@ public class Main {
     ConsoleUI ui = new ConsoleUI(1);
 
     ui.play();
+
     }
 
 
