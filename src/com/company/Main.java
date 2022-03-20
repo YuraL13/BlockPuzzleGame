@@ -13,10 +13,8 @@ public class Main {
 
     public static void main(String[] args) {
 
-
-    ConsoleUI ui = new ConsoleUI(1);
-
-    ui.play();
+        Game game = new Game();
+        game.play();
 
     }
 
