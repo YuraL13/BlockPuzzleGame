@@ -13,10 +13,9 @@ public class Main {
 
     public static void main(String[] args) {
 
+        Game game = new Game();
+        game.play();
 
-    ConsoleUI ui = new ConsoleUI(1);
-
-    ui.play();
     }
 
 
