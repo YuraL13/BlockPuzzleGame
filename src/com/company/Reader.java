@@ -17,14 +17,13 @@ public class Reader {
 
     public List<String> readLevelFromFile(){
         try{
-            String fileName = new StringBuilder().append("C:\\Users\\yural\\Desktop\\Mine\\Study TUKE\\Code\\Block Puzzle\\src\\com\\company\\levels\\level").append(level).append(".txt").toString();
+            String fileName = "C:\\Users\\yural\\Desktop\\Mine\\Study TUKE\\Code\\Block Puzzle\\src\\com\\company\\levels\\level" + level + ".txt";
             File file = new File(fileName);
             Scanner scan = new Scanner(file);
 
             while (scan.hasNextLine()){
                 String data = scan.nextLine();
                 listPieces.add(data);
-                System.out.println(data);
             }
             scan.close();
 
