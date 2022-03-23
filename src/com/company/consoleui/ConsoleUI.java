@@ -1,6 +1,5 @@
 package com.company.consoleui;
 
-import com.company.core.Field;
 import com.company.core.GameState;
 import com.company.core.Level;
 import com.company.core.Piece;
@@ -34,7 +33,7 @@ public class ConsoleUI {
             System.out.print("Choose piece(to clear the field enter -1): ");
             int choice = s.nextInt();
 
-            if(choice == -1){
+            if(choice == -1){ // To clear the field
                 level = new Level(levelNumber);
                 pieces = level.getPieces();
                 printPieces(level.getPieces());
@@ -42,11 +41,12 @@ public class ConsoleUI {
                 continue;
             }
 
-            if(choice-1 >= pieces.size()){
+            if(choice-1 >= pieces.size()){ //Checks is input is valid
                 System.out.println("!!!NOT VALID ENTER!!!");
                 continue;
             }
 
+            //Enter of coordinates and validation
             Pattern patern = Pattern.compile("[0-9] [0-9]");
 
             System.out.print("Enter coordinates(x y): ");
@@ -64,10 +64,11 @@ public class ConsoleUI {
 
             int x = coords.toCharArray()[0] - 48;
             int y = coords.toCharArray()[1] - 48;
+            //***************************************
 
             var currentPiece = pieces.get(choice - 1);
 
-            makeMove(currentPiece, y, x);
+            makeMove(currentPiece, y, x);//x and y are fliped for more understandable input. Would be better to fix implementation but i'd be too long
 
             if (level.getField().isGameFinished()) {
                 System.out.println("!!!CONGRATULATIONS!!!");
@@ -80,7 +81,7 @@ public class ConsoleUI {
         return level;
     }
 
-    public void printPieces(List<Piece> levelPieces){
+    public void printPieces(List<Piece> levelPieces){ //Prints list of all pieces
         for (int i = 0; i < levelPieces.size(); i++) {
             System.out.println(i + 1 + ".");
             printPiece(levelPieces.get(i).getPiece());
@@ -90,7 +91,7 @@ public class ConsoleUI {
 
     public boolean makeMove(Piece piece, int x, int y){
 
-        var move = level.getField().putPiece(piece.getPiece(), x, y, piece.getColor());
+        var move = level.getField().putPiece(piece, x, y);
 
         if(move) {
             level.removePiece(piece);
@@ -106,7 +107,8 @@ public class ConsoleUI {
         return move;
     }
 
-    public static void printPiece(Point[] p){
+    public static void printPiece(Point[] p){ //Func to print a piece
+        //Creates 2D array with blanc spaces and then replaces right coordinates with X
         String[][] arr = new String[p.length][p.length];
 
         for(int i = 0; i < arr.length; i++){

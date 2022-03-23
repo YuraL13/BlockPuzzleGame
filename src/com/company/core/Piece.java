@@ -11,7 +11,7 @@ public class Piece {
     private Point[] piece;
     private int color = 1;
 
-    //Add color
+
     public Piece(){
         Random r = new Random();
         color = r.nextInt(1, 9);
@@ -28,7 +28,8 @@ public class Piece {
     public Piece(String input){
         piece = processInput(input);
 
-        Random r = new Random();
+        Random r = new Random(); //Every piece gets random number to see difference on the field and represent the color
+        //in upcoming implementation of UI
         color = r.nextInt(1, 9);
     }
 
@@ -57,7 +58,7 @@ public class Piece {
         };
     }
 
-    private void test_swap(Point[] piece){
+    private void test_swap(Point[] piece){ //Rotates piece
         int k = 0;
         for(Point p : piece){
             k = p.x;
