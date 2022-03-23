@@ -12,12 +12,9 @@ import java.util.regex.Pattern;
 public class Main {
 
     public static void main(String[] args) {
+        Game game = new Game();
+        game.play();
 
-//        Game game = new Game();
-//        game.play();
-
-        ConsoleUI test = new ConsoleUI(2);
-        test.play();
     }
 
 
