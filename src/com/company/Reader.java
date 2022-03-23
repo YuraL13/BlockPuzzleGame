@@ -6,6 +6,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * Reads level from txt file
+ */
 public class Reader {
     private List<String> listPieces;
     private int level;

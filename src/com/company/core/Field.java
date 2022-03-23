@@ -18,6 +18,7 @@ public class Field {
 
         field = new int[rowCount][colCount];
 
+        //Generates empty field
         for (int i = 0; i < rowCount; i++){
             for(int j = 0; j < colCount; j++){
                 field[i][j] = 0;
@@ -53,12 +54,12 @@ public class Field {
         this.state = state;
     }
 
-    public boolean putPiece(Point[] points, int x, int y){
+    public boolean putPiece(Piece points, int x, int y){
 
-        if(!isMoveValid(points, x, y)) return false;
+        if(!isMoveValid(points.getPiece(), x, y)) return false;
 
-        for(Point p : points){
-            field[p.x + x][p.y + y] = 1;
+        for(Point p : points.getPiece()){
+            field[p.x + x][p.y + y] = points.getColor();
         }
         return true;
     }
@@ -70,6 +71,8 @@ public class Field {
         for(var p : points){
             field[p.x + x][p.y + y] = c;
         }
+
+
         return true;
     }
 
@@ -93,13 +96,14 @@ public class Field {
 
     public void printField(){
         String output = ".";
-        System.out.print("  ");
+        System.out.print("   ");
         for(int i = 0; i < colCount; i++){
             System.out.print(i + " ");//Not the best way to do thi but it works
         }
+
         System.out.println();
         for (int i = 0; i < rowCount; i++){
-            System.out.print(i + " ");
+            System.out.print(i + "| ");
             for(int j = 0; j < colCount; j++){
                 if(field[i][j] != 0){
                     output = String.valueOf(field[i][j]);

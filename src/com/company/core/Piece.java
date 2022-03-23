@@ -1,20 +1,36 @@
 package com.company.core;
 
 import javax.print.attribute.standard.OrientationRequested;
+import javax.print.attribute.standard.PageRanges;
 import java.awt.*;
 import java.util.List;
+import java.util.Random;
 
 public class Piece {
 
     private Point[] piece;
+    private int color = 1;
 
-    //Add color
+
     public Piece(){
+        Random r = new Random();
+        color = r.nextInt(1, 9);
+    }
 
+    public int getColor() {
+        return color;
+    }
+
+    public void setColor(int color) {
+        this.color = color;
     }
 
     public Piece(String input){
         piece = processInput(input);
+
+        Random r = new Random(); //Every piece gets random number to see difference on the field and represent the color
+        //in upcoming implementation of UI
+        color = r.nextInt(1, 9);
     }
 
     public Point[] getPiece() {
@@ -29,6 +45,9 @@ public class Piece {
             case "1x5" -> piece1x5();
             case "5x1" -> piece5x1();
             case "2x4" -> piece2x4();
+            case "1x4" -> piece1x4();
+            case "4x1" -> piece4x1();
+            case "G" -> pieceG();
             case "D" -> pieceD();
             case "T" -> pieceT();
             case "Z" -> pieceZ();
@@ -39,7 +58,7 @@ public class Piece {
         };
     }
 
-    private void test_swap(Point[] piece){
+    private void test_swap(Point[] piece){ //Rotates piece
         int k = 0;
         for(Point p : piece){
             k = p.x;
@@ -48,6 +67,23 @@ public class Piece {
         }
     }
 
+    private Point[] piece4x1(){
+        var piece = piece1x4();
+        test_swap(piece);
+        return piece;
+    }
+
+    private Point[] pieceG(){
+        Point[] piece = new Point[5];
+
+        piece[0] = new Point(0, 0);
+        piece[1] = new Point(0, 1);
+        piece[2] = new Point(0, 2);
+        piece[3] = new Point(1, 2);
+        piece[4] = new Point(2, 2);
+
+        return piece;
+    }
     private Point[] piece1x3(){
         Point[] piece = new Point[3];
         piece[0] = new Point(0, 0);
@@ -71,6 +107,17 @@ public class Piece {
         piece[1] = new Point(0, 1);
         piece[2] = new Point(1, 0);
         piece[3] = new Point(1, 1);
+
+        return piece;
+    }
+
+    private Point[] piece1x4(){
+        Point[] piece = new Point[4];
+
+        piece[0] = new Point(0, 0);
+        piece[1] = new Point(0, 1);
+        piece[2] = new Point(0, 2);
+        piece[3] = new Point(0, 3);
 
         return piece;
     }
