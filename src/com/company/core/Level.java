@@ -74,4 +74,13 @@ public class Level {
 
     }
 
+    public boolean removePiece(int i){
+        var res = pieces.remove(i);
+        return res != null;
+    }
+
+    public boolean removePiece(Piece p){
+        return pieces.remove(p);
+    }
+
 }

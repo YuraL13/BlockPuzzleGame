@@ -70,6 +70,8 @@ public class Field {
         for(var p : points){
             field[p.x + x][p.y + y] = c;
         }
+
+
         return true;
     }
 

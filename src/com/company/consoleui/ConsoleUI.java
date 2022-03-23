@@ -23,18 +23,27 @@ public class ConsoleUI {
     public void play() {
         Scanner s = new Scanner(System.in);
 
-        Level Level = new Level(1);
+        var pieces = level.getPieces();
+        var field = level.getField();
 
-        var pieces = Level.getPieces();
-        var field = Level.getField();
         printPieces(pieces);
         field.printField();
-        int c = 0;
 
         while (level.getField().getState() != GameState.SOLVED) {
-            c++;
-            System.out.print("Choose piece: ");
+            System.out.print("Choose piece(to clear the field enter -1): ");
             int choice = s.nextInt();
+
+            if(choice == -1){
+                level = new Level();
+                printPieces(level.getPieces());
+                level.getField().printField();
+                continue;
+            }
+
+            if(choice-1 >= pieces.size()){
+                System.out.println("!!!NOT VALID ENTER!!!");
+                continue;
+            }
 
             Pattern patern = Pattern.compile("[0-9] [0-9]");
 
@@ -42,6 +51,7 @@ public class ConsoleUI {
             var coords = s.nextLine();
             coords = s.nextLine();
 
+            coords = coords.trim();
             Matcher m = patern.matcher(coords);
             if (m.matches()) {
                 coords = coords.replaceAll(" ", "");
@@ -53,10 +63,13 @@ public class ConsoleUI {
             int x = coords.toCharArray()[0] - 48;
             int y = coords.toCharArray()[1] - 48;
 
-            makeMove(pieces.get(choice - 1), y, x, c);
+            var currentPiece = pieces.get(choice - 1);
+
+            makeMove(currentPiece, y, x);
 
             if (level.getField().isGameFinished()) {
                 System.out.println("!!!CONGRATULATIONS!!!");
+                break;
             }
         }
     }
@@ -73,15 +86,18 @@ public class ConsoleUI {
         }
     }
 
-    public boolean makeMove(Piece piece, int x, int y, int c){
+    public boolean makeMove(Piece piece, int x, int y){
 
-        var move = level.getField().putPiece(piece.getPiece(), x, y, c);
+        var move = level.getField().putPiece(piece.getPiece(), x, y, piece.getColor());
 
         if(move) {
+            level.removePiece(piece);
+            printPieces(level.getPieces());
             level.getField().printField();
             System.out.println("------------");
         }
         else{
+            printPieces(level.getPieces());
             level.getField().printField();
             System.out.println("!--------NOT VALID MOVE----------!");
         }

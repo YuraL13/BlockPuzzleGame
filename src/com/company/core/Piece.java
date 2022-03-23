@@ -3,18 +3,32 @@ package com.company.core;
 import javax.print.attribute.standard.OrientationRequested;
 import java.awt.*;
 import java.util.List;
+import java.util.Random;
 
 public class Piece {
 
     private Point[] piece;
+    private int color = 1;
 
     //Add color
     public Piece(){
+        Random r = new Random();
+        color = r.nextInt(1, 9);
+    }
 
+    public int getColor() {
+        return color;
+    }
+
+    public void setColor(int color) {
+        this.color = color;
     }
 
     public Piece(String input){
         piece = processInput(input);
+
+        Random r = new Random();
+        color = r.nextInt(1, 9);
     }
 
     public Point[] getPiece() {
