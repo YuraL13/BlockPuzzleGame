@@ -44,6 +44,7 @@ public class Piece {
             case "5x1" -> piece5x1();
             case "2x4" -> piece2x4();
             case "1x4" -> piece1x4();
+            case "G" -> pieceG();
             case "D" -> pieceD();
             case "T" -> pieceT();
             case "Z" -> pieceZ();
@@ -63,6 +64,17 @@ public class Piece {
         }
     }
 
+    private Point[] pieceG(){
+        Point[] piece = new Point[5];
+
+        piece[0] = new Point(0, 0);
+        piece[1] = new Point(0, 1);
+        piece[2] = new Point(0, 2);
+        piece[3] = new Point(1, 2);
+        piece[4] = new Point(2, 2);
+
+        return piece;
+    }
     private Point[] piece1x3(){
         Point[] piece = new Point[3];
         piece[0] = new Point(0, 0);
