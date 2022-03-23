@@ -10,6 +10,24 @@ class FieldTest {
 
     @Test
     void isGameFinished() {
+        assertFalse(field.isGameFinished());
+        field.putPiece(piece.getPiece(), 0, 0, 1);
+        assertFalse(field.isGameFinished());
+        field.putPiece(piece.getPiece(), 2, 0, 1);
+        assertFalse(field.isGameFinished());
+        field.putPiece(new Piece("1x4").getPiece(), 4, 0, 2);
+        assertFalse(field.isGameFinished());
+        field.putPiece(new Piece("5x1").getPiece(), 0, 4, 1);
+
+        assertTrue(field.isGameFinished());
+
+        field = new Field(10, 10);
+
+
+        for(int i = 0; i < field.getColCount(); i++){
+            assertFalse(field.isGameFinished());
+            field.putPiece(new Piece("1x5").getPiece(), 0, i, 1);
+        }
 
     }
 
