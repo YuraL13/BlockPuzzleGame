@@ -1,6 +1,7 @@
 package com.company.core;
 
 import javax.print.attribute.standard.OrientationRequested;
+import javax.print.attribute.standard.PageRanges;
 import java.awt.*;
 import java.util.List;
 import java.util.Random;
@@ -44,6 +45,7 @@ public class Piece {
             case "5x1" -> piece5x1();
             case "2x4" -> piece2x4();
             case "1x4" -> piece1x4();
+            case "4x1" -> piece4x1();
             case "G" -> pieceG();
             case "D" -> pieceD();
             case "T" -> pieceT();
@@ -62,6 +64,12 @@ public class Piece {
             p.x = p.y;
             p.y = k;
         }
+    }
+
+    private Point[] piece4x1(){
+        var piece = piece1x4();
+        test_swap(piece);
+        return piece;
     }
 
     private Point[] pieceG(){

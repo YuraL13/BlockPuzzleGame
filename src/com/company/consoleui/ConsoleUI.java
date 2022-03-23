@@ -15,8 +15,9 @@ import java.util.regex.Pattern;
 public class ConsoleUI {
 
     private Level level;
-
+    private int levelNumber;
     public ConsoleUI(int x){
+        this.levelNumber = x;
         level = new Level(x);
     }
 
@@ -34,7 +35,8 @@ public class ConsoleUI {
             int choice = s.nextInt();
 
             if(choice == -1){
-                level = new Level();
+                level = new Level(levelNumber);
+                pieces = level.getPieces();
                 printPieces(level.getPieces());
                 level.getField().printField();
                 continue;
@@ -108,7 +110,7 @@ public class ConsoleUI {
         String[][] arr = new String[p.length][p.length];
 
         for(int i = 0; i < arr.length; i++){
-            for (int j = 0; j < arr.length-1; j++){
+            for (int j = 0; j < arr.length; j++){
                 arr[i][j] = " ";
             }
         }
@@ -118,7 +120,7 @@ public class ConsoleUI {
         }
 
         for(int i = 0; i < arr.length; i++){
-            for (int j = 0; j < arr.length-1; j++){
+            for (int j = 0; j < arr.length; j++){
                 System.out.print(arr[i][j] + ' ');
             }
             if(Arrays.stream(arr[i]).toList().contains("X"))

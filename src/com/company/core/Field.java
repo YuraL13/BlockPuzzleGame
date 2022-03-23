@@ -95,13 +95,14 @@ public class Field {
 
     public void printField(){
         String output = ".";
-        System.out.print("  ");
+        System.out.print("   ");
         for(int i = 0; i < colCount; i++){
             System.out.print(i + " ");//Not the best way to do thi but it works
         }
+
         System.out.println();
         for (int i = 0; i < rowCount; i++){
-            System.out.print(i + " ");
+            System.out.print(i + "| ");
             for(int j = 0; j < colCount; j++){
                 if(field[i][j] != 0){
                     output = String.valueOf(field[i][j]);
