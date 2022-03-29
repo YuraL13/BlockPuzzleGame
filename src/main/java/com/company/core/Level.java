@@ -1,6 +1,6 @@
 package com.company.core;
 
-import com.company.Reader;
+import com.company.Services.Reader;
 
 import java.util.ArrayList;
 import java.util.List;
