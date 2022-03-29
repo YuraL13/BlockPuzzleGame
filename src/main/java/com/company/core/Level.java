@@ -1,6 +1,6 @@
 package com.company.core;
 
-import com.company.Services.Reader;
+import com.company.consoleui.Reader;
 
 import java.util.ArrayList;
 import java.util.List;

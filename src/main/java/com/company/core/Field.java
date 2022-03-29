@@ -125,4 +125,8 @@ public class Field {
         }
     }
 
+    public int size(){
+        return rowCount*colCount;
+    }
+
 }
