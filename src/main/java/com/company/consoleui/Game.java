@@ -1,10 +1,6 @@
-package com.company;
+package com.company.consoleui;
 
-import com.company.consoleui.ConsoleUI;
-import com.company.core.Field;
 import com.company.core.GameState;
-import com.company.core.Level;
-import com.company.core.Piece;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -26,7 +22,7 @@ public class Game {
 
     public void play(){
         long count = 1;
-        try (Stream<Path> files = Files.list(Paths.get("C:\\Users\\yural\\Desktop\\Mine\\Study TUKE\\Code\\Block Puzzle\\src\\com\\company\\levels"))) {
+        try (Stream<Path> files = Files.list(Paths.get("C:\\Users\\yural\\Desktop\\Mine\\Study TUKE\\Code\\Block Puzzle\\src\\main\\resources\\levels"))) {
             count = files.count();
         } catch (IOException e) {
             e.printStackTrace();

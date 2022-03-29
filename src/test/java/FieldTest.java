@@ -1,5 +1,6 @@
-package com.company.core;
 
+import com.company.core.Field;
+import com.company.core.Piece;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
