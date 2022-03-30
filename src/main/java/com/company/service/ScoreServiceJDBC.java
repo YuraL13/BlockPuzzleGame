@@ -5,7 +5,7 @@ import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 
-public class ScoreServiceJDBC {
+public class ScoreServiceJDBC  {
     private static final String URL = "jdbc:postgresql://localhost:5432/postgres";
     private static final String USER = "postgres";
     //password
@@ -34,7 +34,6 @@ public class ScoreServiceJDBC {
 //        }
 //
 //    }
-
     /**
      * Starts timer
      */
@@ -76,8 +75,16 @@ public class ScoreServiceJDBC {
             var result = statement.executeUpdate(sql);
         }
 
-        //To get kinda valid output if needed try using ROLLUP()!!!
+    }
 
+    public void topScores() throws SQLException{
+
+        try( var connection =  DriverManager.getConnection(URL, USER, PASSWORD); var statement = connection.createStatement()){
+            ResultSet resultSet = statement.executeQuery("select * from score order by score desc;");
+            while (resultSet.next()){
+                System.out.println(resultSet.getString("player") + "| score : " + resultSet.getString("score"));
+            }
+        }
     }
 
 }

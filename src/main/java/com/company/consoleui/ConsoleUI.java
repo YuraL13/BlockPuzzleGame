@@ -3,24 +3,122 @@ package com.company.consoleui;
 import com.company.core.GameState;
 import com.company.core.Level;
 import com.company.core.Piece;
+import com.company.service.ScoreServiceJDBC;
 
 import java.awt.*;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.sql.SQLException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Stream;
 
 public class ConsoleUI {
 
     private Level level;
     private int levelNumber;
+
+    private ConsoleUI console;
+    private String currentPlayer;
+    ScoreServiceJDBC score;
+
     public ConsoleUI(int x){
         this.levelNumber = x;
         level = new Level(x);
+        score = new ScoreServiceJDBC();
     }
 
-    public void play() {
+    public ConsoleUI(){
+        score = new ScoreServiceJDBC();
+    }
+
+    public void start() throws SQLException {
+        while (true) {
+            Scanner s = new Scanner(System.in);
+            int inp = 0;
+            String player;
+            do {
+                System.out.println("\tTo start game enter enter 1\n\t" +
+                        "To see top scores enter 2\n\t" +
+                        "To quit enter 0");
+                System.out.print("Enter: ");
+                inp = s.nextInt();
+
+
+                System.out.println("---------------------------------");
+            } while (inp != 1 && inp != 2 && inp != 0);
+
+            switch (inp) {
+                case 1 -> playGame();
+                case 2 -> {
+                    score.topScores();
+                    System.out.println("---------------------------------");
+                }
+                case 0 -> {
+                    return;
+                }
+            }
+        }
+    }
+
+    private void playGame(){
+        long count = 1;
+        try (Stream<Path> files = Files.list(Paths.get("C:\\Users\\yural\\Desktop\\Mine\\Study TUKE\\Code\\Block Puzzle\\src\\main\\resources\\levels"))) {
+            count = files.count();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        askPlayer();
+        System.out.println("Welcome: " + currentPlayer);
+        System.out.println("Try you skills and become the best");
+        int level = 1;
+
+        do {
+            score.startTimer();
+            console = new ConsoleUI(level);
+            console.startLevel();
+            var gameState = console.getLevel().getField().getState();
+
+            if(gameState == GameState.SOLVED){
+                console.getLevel().getField().setState(GameState.PLAYING);
+                level++;
+            }
+            var time = score.stopTimer();
+            System.out.println("TIME: " + time + " seconds");
+
+            var levelScore =  score.countScore(time, console.getLevel().getField().size());
+
+            System.out.println("Your score for this level is: " + levelScore);
+            try {
+                score.addScoreToDB(currentPlayer, levelScore, level);
+            } catch (SQLException e) {
+                System.out.println("Score was not recorded to database");
+                break;
+            }
+
+        }while (level != count);
+
+        System.out.println("YOU SOLVED ALL THE LEVELS!!!!");
+
+    }
+
+    private void askPlayer(){
+        Scanner inp = new Scanner(System.in);
+
+        do{
+            System.out.println("Enter you username: ");
+            currentPlayer = inp.nextLine();
+        }while (currentPlayer.length() > 32);
+    }
+
+
+    public void startLevel() {
         Scanner s = new Scanner(System.in);
 
         var pieces = level.getPieces();
