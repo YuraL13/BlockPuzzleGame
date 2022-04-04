@@ -3,7 +3,11 @@ package com.company.consoleui;
 import com.company.core.GameState;
 import com.company.core.Level;
 import com.company.core.Piece;
+import com.company.entity.Score;
+import com.company.service.ScoreService;
 import com.company.service.ScoreServiceJDBC;
+import com.company.service.ScoreServiceJPA;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.awt.*;
 import java.io.IOException;
@@ -25,19 +29,25 @@ public class ConsoleUI {
 
     private ConsoleUI console;
     private String currentPlayer;
-    ScoreServiceJDBC score;
+    ScoreService score;
 
     public ConsoleUI(int x){
         this.levelNumber = x;
         level = new Level(x);
-        score = new ScoreServiceJDBC();
+        score = new ScoreServiceJPA();
     }
 
     public ConsoleUI(){
-        score = new ScoreServiceJDBC();
+        score = new ScoreServiceJPA();
     }
 
-    public void start() throws SQLException {
+    @Autowired
+    private ScoreService scoreService;
+
+    public void start(){
+        scoreService.addScore(new Score("JPATestPlayer", 1, 100));
+
+
         while (true) {
             Scanner s = new Scanner(System.in);
             int inp = 0;
@@ -66,7 +76,9 @@ public class ConsoleUI {
         }
     }
 
-    private void playGame() throws SQLException{
+
+    private void playGame() {
+
         long count = 1;
         try (Stream<Path> files = Files.list(Paths.get("C:\\Users\\yural\\Desktop\\Mine\\Study TUKE\\Code\\Block Puzzle\\src\\main\\resources\\levels"))) {
             count = files.count();
@@ -96,8 +108,8 @@ public class ConsoleUI {
 
             System.out.println("Your score for this level is: " + levelScore);
             try {
-                score.addScore(currentPlayer, levelScore, level);
-            } catch (SQLException e) {
+                score.addScore(new Score(currentPlayer, level, levelScore));
+            } catch (UnknownError e) {
                 System.out.println("Score was not recorded to database");
                 break;
             }

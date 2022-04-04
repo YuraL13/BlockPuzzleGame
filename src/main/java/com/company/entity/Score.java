@@ -34,6 +34,12 @@ public class Score implements Serializable {
 
     }
 
+    public Score(String player, int level, int score){
+        this.player = player;
+        this.level = level;
+        this.score = score;
+    }
+
     @Override
     public String toString(){
         return "player=" + player +
