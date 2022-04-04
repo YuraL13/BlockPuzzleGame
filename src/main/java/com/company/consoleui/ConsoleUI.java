@@ -56,7 +56,7 @@ public class ConsoleUI {
             switch (inp) {
                 case 1 -> playGame();
                 case 2 -> {
-                    score.topScores();
+                    printScores(score.topScores());
                     System.out.println("---------------------------------");
                 }
                 case 0 -> {
@@ -66,7 +66,7 @@ public class ConsoleUI {
         }
     }
 
-    private void playGame(){
+    private void playGame() throws SQLException{
         long count = 1;
         try (Stream<Path> files = Files.list(Paths.get("C:\\Users\\yural\\Desktop\\Mine\\Study TUKE\\Code\\Block Puzzle\\src\\main\\resources\\levels"))) {
             count = files.count();
@@ -92,11 +92,11 @@ public class ConsoleUI {
             var time = score.stopTimer();
             System.out.println("TIME: " + time + " seconds");
 
-            var levelScore =  score.countScore(time, console.getLevel().getField().size());
+            var levelScore = score.countScore(time, console.getLevel().getField().size());
 
             System.out.println("Your score for this level is: " + levelScore);
             try {
-                score.addScoreToDB(currentPlayer, levelScore, level);
+                score.addScore(currentPlayer, levelScore, level);
             } catch (SQLException e) {
                 System.out.println("Score was not recorded to database");
                 break;
@@ -225,6 +225,12 @@ public class ConsoleUI {
             }
             if(Arrays.stream(arr[i]).toList().contains("X"))
                 System.out.println();
+        }
+    }
+
+    private void printScores(List<String> scores){
+        for (var s: scores) {
+            System.out.println(s);
         }
     }
 
