@@ -3,14 +3,15 @@ package com.company.consoleui;
 import com.company.core.GameState;
 import com.company.core.Level;
 import com.company.core.Piece;
-import com.company.service.ScoreServiceJDBC;
+import com.company.entity.Score;
+import com.company.service.ScoreService;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.awt.*;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.sql.SQLException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
@@ -25,19 +26,21 @@ public class ConsoleUI {
 
     private ConsoleUI console;
     private String currentPlayer;
-    ScoreServiceJDBC score;
+
 
     public ConsoleUI(int x){
         this.levelNumber = x;
         level = new Level(x);
-        score = new ScoreServiceJDBC();
     }
 
     public ConsoleUI(){
-        score = new ScoreServiceJDBC();
+
     }
 
-    public void start() throws SQLException {
+    @Autowired
+    private ScoreService score;
+
+    public void start(){
         while (true) {
             Scanner s = new Scanner(System.in);
             int inp = 0;
@@ -56,7 +59,7 @@ public class ConsoleUI {
             switch (inp) {
                 case 1 -> playGame();
                 case 2 -> {
-                    printScores(score.topScores());
+                    printScores(score.topScores(), 0);
                     System.out.println("---------------------------------");
                 }
                 case 0 -> {
@@ -66,7 +69,9 @@ public class ConsoleUI {
         }
     }
 
-    private void playGame() throws SQLException{
+
+    private void playGame() {
+
         long count = 1;
         try (Stream<Path> files = Files.list(Paths.get("C:\\Users\\yural\\Desktop\\Mine\\Study TUKE\\Code\\Block Puzzle\\src\\main\\resources\\levels"))) {
             count = files.count();
@@ -96,8 +101,8 @@ public class ConsoleUI {
 
             System.out.println("Your score for this level is: " + levelScore);
             try {
-                score.addScore(currentPlayer, levelScore, level);
-            } catch (SQLException e) {
+                score.addScore(new Score(currentPlayer, level, levelScore));
+            } catch (UnknownError e) {
                 System.out.println("Score was not recorded to database");
                 break;
             }
@@ -231,6 +236,12 @@ public class ConsoleUI {
     private void printScores(List<String> scores){
         for (var s: scores) {
             System.out.println(s);
+        }
+    }
+
+    private void printScores(List<Score> scores, int i){
+        for (var s: scores) {
+            System.out.println(s.getPlayer() + " | " + s.getScore());
         }
     }
 

@@ -1,14 +1,18 @@
 package com.company.service;
 
-import java.sql.SQLException;
+import com.company.entity.Score;
+
 import java.util.List;
 
 public interface ScoreService {
     /**
      * Adds score to databasee
      */
-    void addScore(String player, long score, int level)throws SQLException;
+    void addScore(Score score);
 
-    List<String> topScores() throws SQLException;
+    List<Score> topScores();
+    void startTimer();
+    long stopTimer();
+
     int countScore(long time, int  basicScore);
 }
