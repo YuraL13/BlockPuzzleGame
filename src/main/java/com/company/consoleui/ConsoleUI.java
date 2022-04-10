@@ -5,8 +5,6 @@ import com.company.core.Level;
 import com.company.core.Piece;
 import com.company.entity.Score;
 import com.company.service.ScoreService;
-import com.company.service.ScoreServiceJDBC;
-import com.company.service.ScoreServiceJPA;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.awt.*;
@@ -14,7 +12,6 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.sql.SQLException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
@@ -29,25 +26,21 @@ public class ConsoleUI {
 
     private ConsoleUI console;
     private String currentPlayer;
-    ScoreService score;
+
 
     public ConsoleUI(int x){
         this.levelNumber = x;
         level = new Level(x);
-        score = new ScoreServiceJPA();
     }
 
     public ConsoleUI(){
-        score = new ScoreServiceJPA();
+
     }
 
     @Autowired
-    private ScoreService scoreService;
+    private ScoreService score;
 
     public void start(){
-        scoreService.addScore(new Score("JPATestPlayer", 1, 100));
-
-
         while (true) {
             Scanner s = new Scanner(System.in);
             int inp = 0;
@@ -66,7 +59,7 @@ public class ConsoleUI {
             switch (inp) {
                 case 1 -> playGame();
                 case 2 -> {
-                    printScores(score.topScores());
+                    printScores(score.topScores(), 0);
                     System.out.println("---------------------------------");
                 }
                 case 0 -> {
@@ -243,6 +236,12 @@ public class ConsoleUI {
     private void printScores(List<String> scores){
         for (var s: scores) {
             System.out.println(s);
+        }
+    }
+
+    private void printScores(List<Score> scores, int i){
+        for (var s: scores) {
+            System.out.println(s.getPlayer() + " | " + s.getScore());
         }
     }
 

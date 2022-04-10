@@ -1,6 +1,7 @@
 package com.company.entity;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import java.io.Serializable;
 
@@ -8,18 +9,19 @@ import java.io.Serializable;
 public class Score implements Serializable {
 
     @Id
+    @GeneratedValue
     private int playerID;
 
     private String player;
-    private int level;
-    private long score;
+    private int level; 
+    private int score;
 
     public long getScore() {
         return score;
     }
 
     public void setScore(long score) {
-        this.score = score;
+        this.score = (int)score;
     }
 
     public String getPlayer() {
@@ -42,9 +44,9 @@ public class Score implements Serializable {
 
     @Override
     public String toString(){
-        return "player=" + player +
-                "level=" + level +
-                "score=" + score;
+        return "player = " + player +
+                "level = " + level +
+                "score = " + score;
     }
 
 }

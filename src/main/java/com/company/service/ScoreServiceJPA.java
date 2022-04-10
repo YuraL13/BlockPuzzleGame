@@ -5,12 +5,10 @@ import com.company.entity.Score;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
-import java.sql.SQLException;
 import java.util.List;
 
 @Transactional
 public class ScoreServiceJPA implements ScoreService{
-    private long Time;
 
     @PersistenceContext
     private EntityManager entityManager;
@@ -21,9 +19,12 @@ public class ScoreServiceJPA implements ScoreService{
     }
 
     @Override
-    public List<String> topScores() {
-        return null;
+    public List<Score> topScores() {
+        List<Score> a = entityManager.createQuery("SELECT s FROM Score s order by s.score").setMaxResults(10).getResultList();
+        return a;
     }
+
+    private long Time;
 
     public void startTimer(){
         Time = System.nanoTime();

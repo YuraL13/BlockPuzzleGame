@@ -2,7 +2,6 @@ package com.company.service;
 
 import com.company.entity.Score;
 
-import java.sql.SQLException;
 import java.util.List;
 
 public interface ScoreService {
@@ -11,8 +10,7 @@ public interface ScoreService {
      */
     void addScore(Score score);
 
-    List<String> topScores();
-
+    List<Score> topScores();
     void startTimer();
     long stopTimer();
 
