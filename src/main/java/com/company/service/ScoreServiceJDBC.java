@@ -4,8 +4,10 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
-public class ScoreServiceJDBC  {
+public class ScoreServiceJDBC implements ScoreService {
     private static final String URL = "jdbc:postgresql://localhost:5432/postgres";
     private static final String USER = "postgres";
     //password
@@ -68,7 +70,7 @@ public class ScoreServiceJDBC  {
     /**
      * Adds score to databasee
      */
-    public void addScoreToDB(String player, long score, int level) throws SQLException{
+    public void addScore(String player, long score, int level) throws SQLException{
         var sql = "INSERT INTO SCORE (player, level, score) VALUES ('" + player + "'," + (level-1) + "," + score + ");";
 
         try( var connection =  DriverManager.getConnection(URL, USER, PASSWORD); var statement = connection.createStatement()){
@@ -77,14 +79,15 @@ public class ScoreServiceJDBC  {
 
     }
 
-    public void topScores() throws SQLException{
-
+    public List<String> topScores() throws SQLException{
+        List<String> scores = new ArrayList<>();
         try( var connection =  DriverManager.getConnection(URL, USER, PASSWORD); var statement = connection.createStatement()){
             ResultSet resultSet = statement.executeQuery("select * from score order by score desc;");
             while (resultSet.next()){
-                System.out.println(resultSet.getString("player") + "| score : " + resultSet.getString("score"));
+                scores.add(resultSet.getString("player") + " | score : " + resultSet.getString("score"));
             }
         }
+        return scores;
     }
 
 }
