@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import java.io.Serializable;
+import java.util.Date;
 
 @Entity
 public class Score implements Serializable {
@@ -15,6 +16,16 @@ public class Score implements Serializable {
     private String player;
     private int level; 
     private int score;
+
+    private Date date;
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
 
     public long getScore() {
         return score;
@@ -36,10 +47,11 @@ public class Score implements Serializable {
 
     }
 
-    public Score(String player, int level, int score){
+    public Score(String player, int level, int score, Date date){
         this.player = player;
         this.level = level;
         this.score = score;
+        this.date = date;
     }
 
     @Override

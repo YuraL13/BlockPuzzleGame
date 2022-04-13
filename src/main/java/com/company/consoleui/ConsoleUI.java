@@ -13,6 +13,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
 import java.util.regex.Matcher;
@@ -101,7 +102,7 @@ public class ConsoleUI {
 
             System.out.println("Your score for this level is: " + levelScore);
             try {
-                score.addScore(new Score(currentPlayer, level, levelScore));
+                score.addScore(new Score(currentPlayer, level, levelScore, new Date()));
             } catch (UnknownError e) {
                 System.out.println("Score was not recorded to database");
                 break;
@@ -241,7 +242,7 @@ public class ConsoleUI {
 
     private void printScores(List<Score> scores, int i){
         for (var s: scores) {
-            System.out.println(s.getPlayer() + " | " + s.getScore());
+            System.out.println(s.getPlayer() + " | " + s.getScore() + " | " + s.getDate());
         }
     }
 

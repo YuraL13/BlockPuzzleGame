@@ -1,31 +1,34 @@
 package com.company.service;
 
 import com.company.entity.Score;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.web.client.RestTemplate;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.transaction.Transactional;
+import java.util.Arrays;
 import java.util.List;
 
-@Transactional
-public class ScoreServiceJPA implements ScoreService{
+public class ScoreServiceRestClient implements ScoreService{
 
-    @PersistenceContext
-    private EntityManager entityManager;
+    @Value("${remote.server.api}")
+    private String url;
+
+    @Autowired
+    private RestTemplate restTemplate;
 
     @Override
     public void addScore(Score score) {
-        entityManager.persist(score);
+        restTemplate.postForEntity(url + "/score", score, Score.class);
     }
 
     @Override
     public List<Score> topScores() {
-        List<Score> a = entityManager.createQuery("SELECT s FROM Score s order by s.score desc").setMaxResults(10).getResultList();
-        return a;
+        return Arrays.asList(restTemplate.getForEntity(url + "/score", Score[].class).getBody());
     }
 
     private long Time;
 
+    @Override
     public void startTimer(){
         Time = System.nanoTime();
     }
@@ -38,7 +41,7 @@ public class ScoreServiceJPA implements ScoreService{
         Time = System.nanoTime() - Time;
         return Time/1000000000;
     }
-
+    @Override
     public int countScore(long time, int  basicScore){
 
         if(time < 10){
