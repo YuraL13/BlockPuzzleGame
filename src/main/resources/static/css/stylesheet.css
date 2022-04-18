@@ -1,0 +1,30 @@
+h1 {
+    text-align: center;
+    color: red;
+}
+
+body{
+    background-image: url("../images/bg.jpg");
+    font-family: 'Maven Pro', sans-serif;
+    text-align: center;
+    color: aliceblue;
+
+}
+
+.score{
+    font-size: 40px;
+    color: aliceblue;
+}
+
+.score > div{
+    /* border-bottom: 3px white solid; */
+
+    padding-top: 20px ;
+    width: 33%;
+    float: left;
+    height: 50px;
+}
+
+#default-score > div{
+    border-bottom: 3px white solid;
+}

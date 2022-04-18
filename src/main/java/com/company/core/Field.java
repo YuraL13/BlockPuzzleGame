@@ -94,7 +94,7 @@ public class Field {
         return true;
     }
 
-    public void printField(){
+    public void printFieldOld(){
         String output = ".";
         System.out.print("   ");
         for(int i = 0; i < colCount; i++){
@@ -115,6 +115,36 @@ public class Field {
             }
             System.out.println();
         }
+    }
+
+    public String getField(){
+        StringBuilder sb = new StringBuilder();
+
+        String output = ".";
+        System.out.print("   ");
+        for(int i = 0; i < colCount; i++){
+            System.out.print(i + " ");//Not the best way to do thi but it works
+            sb.append(i).append(" ");
+        }
+
+        System.out.println();
+        sb.append("\n");
+        for (int i = 0; i < rowCount; i++){
+            System.out.print(i + "| ");
+            for(int j = 0; j < colCount; j++){
+                if(field[i][j] != 0){
+                    output = String.valueOf(field[i][j]);
+                }
+                else {
+                    output = ".";
+                }
+                System.out.print(output + " ");
+                sb.append(output).append(" ");
+            }
+            System.out.println();
+            sb.append("\n");
+        }
+        return sb.toString();
     }
 
     public void clearFiled(){

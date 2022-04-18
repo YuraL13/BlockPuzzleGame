@@ -131,7 +131,7 @@ public class ConsoleUI {
         var field = level.getField();
 
         printPieces(pieces);
-        field.printField();
+        printField(level.getField().getField());
 
         while (level.getField().getState() != GameState.SOLVED) {
             System.out.print("Choose piece(to clear the field enter -1): ");
@@ -141,7 +141,7 @@ public class ConsoleUI {
                 level = new Level(levelNumber);
                 pieces = level.getPieces();
                 printPieces(level.getPieces());
-                level.getField().printField();
+                printField(level.getField().getField());
                 continue;
             }
 
@@ -194,18 +194,19 @@ public class ConsoleUI {
     }
 
     public boolean makeMove(Piece piece, int x, int y){
+        var filed = level.getField().getField();
 
         var move = level.getField().putPiece(piece, x, y);
 
         if(move) {
             level.removePiece(piece);
             printPieces(level.getPieces());
-            level.getField().printField();
+            printField(filed);
             System.out.println("------------");
         }
         else{
             printPieces(level.getPieces());
-            level.getField().printField();
+            printField(filed);
             System.out.println("!--------NOT VALID MOVE----------!");
         }
         return move;
@@ -246,4 +247,8 @@ public class ConsoleUI {
         }
     }
 
+
+    public void printField(String f){
+        System.out.println(f);
+    }
 }

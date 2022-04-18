@@ -14,10 +14,14 @@ public class Score implements Serializable {
     private int playerID;
 
     private String player;
-    private int level; 
     private int score;
-
     private Date date;
+    private int level;
+
+
+    public int getLevel() {
+        return level;
+    }
 
     public Date getDate() {
         return date;
@@ -57,8 +61,8 @@ public class Score implements Serializable {
     @Override
     public String toString(){
         return "player = " + player +
-                "level = " + level +
-                "score = " + score;
+                " level = " + level +
+                " score = " + score;
     }
 
 }
