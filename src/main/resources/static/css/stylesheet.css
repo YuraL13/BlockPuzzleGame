@@ -8,7 +8,7 @@ body{
     font-family: 'Maven Pro', sans-serif;
     text-align: center;
     color: aliceblue;
-
+    
 }
 
 .score{
@@ -20,7 +20,7 @@ body{
     /* border-bottom: 3px white solid; */
 
     padding-top: 20px ;
-    width: 33%;
+    width: 25%;
     float: left;
     height: 50px;
 }
@@ -28,3 +28,29 @@ body{
 #default-score > div{
     border-bottom: 3px white solid;
 }
+
+.score > div:first-of-type{
+    text-align: left;
+}
+
+.field{
+    display: flex;
+    justify-content: center;
+}
+
+img{
+    height: 50px;
+}
+
+.piece{
+    margin: 20px;
+    float: left;
+}
+
+.pieces_list{
+    margin: auto;
+    display: flex;
+    justify-content: center;
+}
+
+

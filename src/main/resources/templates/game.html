@@ -9,8 +9,13 @@
 <body>
 
 <h1>Block Puzzle!</h1>
+<div class="content_wrapper" >
 
-<br>
-<span th:utext="${htmlField}" ></span>
+    <div class="pieces_list" th:utext="${pieces}" ></div>
 
+    <div class="field">
+        <span th:utext="${htmlField}" ></span>
+    </div>
+
+</div>
 </body>
