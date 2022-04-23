@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments::head-info" ></head>
+
+<body>
+
+<!--<h1><a href="#">Block Puzzle</a></h1>-->
+    <div th:replace="fragments::header" ></div>
+
+    <a href="/game"></a>
+
+    <!--<button class="togame-button" onclick="window.location.href='/game';" ></button>-->
+    <div class="buttons" >
+        <div ontouchstart="">
+            <div class="button">
+                <a href="/game">Start Game!</a>
+            </div>
+        </div>
+
+    </div>
+
+    <div th:replace="fragments::top-scores()" ></div>
+
+    <div th:replace="fragments::footer" ></div>
+
+</body>
+</html>

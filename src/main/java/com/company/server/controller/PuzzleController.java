@@ -16,7 +16,7 @@ import java.awt.*;
 @RequestMapping("/game")
 @Scope(WebApplicationContext.SCOPE_SESSION)
 public class PuzzleController {
-    private final ConsoleUI consoleUI = new ConsoleUI(1);
+    private final ConsoleUI consoleUI = new ConsoleUI(1); //Change to level generating. In case rewrite consoleUI
     private Field field = consoleUI.getLevel().getField();
 
     public String state = field.getState().toString();
@@ -32,6 +32,12 @@ public class PuzzleController {
         model.addAttribute("htmlField", getHtmlField());
         model.addAttribute("pieces", getHtmlPieces());
         return "game";
+    }
+
+    @RequestMapping("/")
+    public String index(Model model){
+        model.addAttribute("scores", scoreService.topScores());
+        return "index";
     }
 
     @RequestMapping("/score")

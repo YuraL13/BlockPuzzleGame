@@ -3,12 +3,18 @@ h1 {
     color: red;
 }
 
+a{
+    text-decoration: none;
+}
+
 body{
     background-image: url("../images/bg.jpg");
     font-family: 'Maven Pro', sans-serif;
     text-align: center;
     color: aliceblue;
-    
+    position: relative;
+    height: 200%;
+    font-family: 'ArcadeClassic', sans-serif;
 }
 
 .score{
@@ -47,10 +53,94 @@ img{
     float: left;
 }
 
+.piece:hover{
+    margin: 20px;
+    float: left;
+    border: 1px solid #FFE5C4;
+}
+
 .pieces_list{
     margin: auto;
     display: flex;
     justify-content: center;
 }
 
+.togame-button{
+    height: 200px;
+    width: 500px;
+    color: black;
+}
 
+.footer-text{
+    justify-content: baseline;
+    bottom: 0px;
+}
+
+a{
+    text-decoration: none;
+}
+
+.header > a{
+    font-size: 60px;
+    color: rgb(30, 145, 30);
+}
+
+.header{
+    font-family: 'ArcadeClassic', sans-serif;
+}
+
+
+.button{
+    position:relative;
+    display:inline-block;
+    margin:20px;
+  }
+  
+  .button a{
+    color:white;
+    font-family: 'ArcadeClassic', sans-serif;
+    font-weight:bold;
+    font-size:36px;
+    text-align: center;
+    text-decoration:none;
+    background-color:#FFA12B;
+    display:block;
+    position:relative;
+    padding:20px 40px;
+    
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    text-shadow: 0px 1px 0px #000;
+    filter: dropshadow(color=#000, offx=0px, offy=1px);
+    
+    -webkit-box-shadow:inset 0 1px 0 #FFE5C4, 0 10px 0 #915100;
+    -moz-box-shadow:inset 0 1px 0 #FFE5C4, 0 10px 0 #915100;
+    box-shadow:inset 0 1px 0 #FFE5C4, 0 10px 0 #915100;
+    
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+  }
+  
+  .button a:active{
+    top:10px;
+    background-color:#F78900;
+    
+    -webkit-box-shadow:inset 0 1px 0 #FFE5C4, inset 0 -3px 0 #915100;
+    -moz-box-shadow:inset 0 1px 0 #FFE5C4, inset 0 -3pxpx 0 #915100;
+    box-shadow:inset 0 1px 0 #FFE5C4, inset 0 -3px 0 #915100;
+  }
+  
+  .button:after{
+    content:"";
+    height:100%;
+    width:100%;
+    padding:4px;
+    position: absolute;
+    bottom:-15px;
+    left:-4px;
+    z-index:-1;
+    background-color:#2B1800;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+  }

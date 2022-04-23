@@ -94,7 +94,7 @@ public class Field {
         return true;
     }
 
-    public void printFieldOld(){
+    public void printField(){
         String output = ".";
         System.out.print("   ");
         for(int i = 0; i < colCount; i++){

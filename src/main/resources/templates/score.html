@@ -1,17 +1,12 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
       xsi:schemaLocation="http://www.thymeleaf.org ">
-<head>
-    <meta charset="UTF-8">
-    <title>Top Scores</title>
-    <link rel="stylesheet" href="/css/stylesheet.css"/>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Maven+Pro:wght@500&display=swap" rel="stylesheet">
-</head>
+
+<head th:replace="fragments::head-info" ></head>
+
 <body>
 
-<h1>Block Puzzle!</h1>
+<div th:replace="fragments::header" ></div>
 <h2>Best scores</h2>
 
 <div class="score" id="default-score">

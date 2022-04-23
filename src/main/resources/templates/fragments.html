@@ -1,0 +1,38 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<!--/*@thymesVar id="userController" type="sk.tuke.gamestudio.server.controller.UserController"*/-->
+
+<div th:fragment="header" >
+    <div class="header" ><a href="/">Block Puzzle</a></div>
+</div>
+
+<head th:fragment="head-info" >
+    <meta charset="UTF-8">
+    <title>Block puzzle</title>
+    <link rel="stylesheet" href="/css/stylesheet.css"/>
+    <link href="http://fonts.cdnfonts.com/css/arcade-classic" rel="stylesheet">
+</head>
+
+<div th:fragment="footer">
+    <hr/>
+    <div class="footer-text">Created by yurii Levchenko in 2022</div>
+</div>
+
+<div th:fragment="top-scores" >
+    <div class="score" id="default-score">
+        <div>0.</div>
+        <div>Player</div>
+        <div>Level</div>
+        <div>Score</div>
+    </div>
+
+    <div class="score" th:each="score: ${scores}" >
+        <div th:text="${scoreStat.index+1}" ></div>
+        <div th:text="${score.getPlayer()}"></div>
+        <div th:text="${score.getLevel()+1}" ></div>
+        <div th:text="${score.getScore()}" ></div>
+    </div>
+
+</div>
+
+</html>

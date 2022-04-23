@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/scoreRest")
+@RequestMapping("/score")
 public class ScoreServiceRest {
 
     @Autowired
