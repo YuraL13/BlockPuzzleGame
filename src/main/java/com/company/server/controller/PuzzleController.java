@@ -2,35 +2,47 @@ package com.company.server.controller;
 
 import com.company.consoleui.ConsoleUI;
 import com.company.core.Field;
+import com.company.core.Level;
 import com.company.service.ScoreService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.context.WebApplicationContext;
 
 import java.awt.*;
 
 @Controller
-@RequestMapping("/game")
 @Scope(WebApplicationContext.SCOPE_SESSION)
 public class PuzzleController {
     private final ConsoleUI consoleUI = new ConsoleUI(1); //Change to level generating. In case rewrite consoleUI
-    private Field field = consoleUI.getLevel().getField();
+//    private Field field = consoleUI.getLevel().getField();
 
-    public String state = field.getState().toString();
-    public String fieldUI = field.getField();
+    private Level level = new Level(1);
+    private Field field = level.getField();
 
     @Autowired
     private ScoreService scoreService;
 
-    @RequestMapping
-    public String getState(
+    @RequestMapping("/game")
+    public String getState(@RequestParam(required = false) String p,
+                           @RequestParam(required = false) String row,
+                           @RequestParam(required = false) String col,
             Model model){
+
+        if(p != null) {
+//            consoleUI.makeMove(consoleUI.getLevel().getPieces().get(Integer.parseInt(p)),
+//                    Integer.parseInt(row), Integer.parseInt(col));
+            var piece = level.getPieces().get(Integer.parseInt(p));
+            level.makeMove(piece, Integer.parseInt(row), Integer.parseInt(col));
+        }
+
         model.addAttribute("scores", scoreService.topScores());
         model.addAttribute("htmlField", getHtmlField());
         model.addAttribute("pieces", getHtmlPieces());
+
         return "game";
     }
 
@@ -48,10 +60,11 @@ public class PuzzleController {
 
     public String getHtmlPieces(){
         StringBuilder sb = new StringBuilder();
-        var pieces = consoleUI.getLevel().getPieces();
+        var pieces = level.getPieces();
 
         for (int i = 0; i < pieces.size(); i++) {
             sb.append("<div class='piece' >");
+            sb.append("<div>" + i +"</div>");
             sb.append(printPiece(pieces.get(i).getPiece()));
             sb.append("</div>");
 
@@ -98,7 +111,12 @@ public class PuzzleController {
             for (int column = 0; column < field.getColCount(); column++) {
                 //var tile = field.getTile(row, column);
                 sb.append("<td>\n");
-                sb.append("<img src='/images/X.png'/>");
+                if(field.getField()[row][column] == 0) {
+                    sb.append("<img src='/images/X.png'/>");
+                }
+                else {
+                    sb.append("<img src='/images/1.png'/>");
+                }
                 sb.append("</td>\n");
             }
             sb.append("</tr>\n");

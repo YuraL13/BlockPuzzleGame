@@ -1,6 +1,8 @@
 package com.company;
 
 import com.company.consoleui.ConsoleUI;
+import com.company.service.SaveGame;
+import com.company.service.SaveGameJPA;
 import com.company.service.ScoreService;
 import com.company.service.ScoreServiceRestClient;
 import org.springframework.boot.CommandLineRunner;
@@ -41,6 +43,11 @@ public class SpringClient {
     @Bean
     public ScoreService scoreService(){
         return new ScoreServiceRestClient();
+    }
+
+    @Bean
+    public SaveGame saveGame(){
+        return new SaveGameJPA();
     }
 
 }

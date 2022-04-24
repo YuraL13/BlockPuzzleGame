@@ -1,5 +1,7 @@
 package com.company.server;
 
+import com.company.service.SaveGame;
+import com.company.service.SaveGameJPA;
 import com.company.service.ScoreService;
 import com.company.service.ScoreServiceJPA;
 import org.springframework.boot.SpringApplication;
@@ -21,6 +23,7 @@ public class PuzzleServer {
         return new ScoreServiceJPA();
     }
 
-
+    @Bean
+    public SaveGame saveGame(){return new SaveGameJPA();}
 
 }

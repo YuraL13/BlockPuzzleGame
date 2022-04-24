@@ -1,6 +1,7 @@
 h1 {
     text-align: center;
-    color: red;
+    font-size: 40px;
+    color: rgb(30, 145, 30);;
 }
 
 a{
@@ -56,7 +57,15 @@ img{
 .piece:hover{
     margin: 20px;
     float: left;
-    border: 1px solid #FFE5C4;
+    height: 120%;
+}
+
+img:hover .parent{
+    height: 60px;
+}
+
+table:hover{
+    border: 2px solid rgb(30, 145, 30);
 }
 
 .pieces_list{

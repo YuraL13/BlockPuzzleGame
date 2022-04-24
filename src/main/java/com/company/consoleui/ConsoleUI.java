@@ -4,6 +4,7 @@ import com.company.core.GameState;
 import com.company.core.Level;
 import com.company.core.Piece;
 import com.company.entity.Score;
+import com.company.service.SaveGame;
 import com.company.service.ScoreService;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -40,6 +41,8 @@ public class ConsoleUI {
 
     @Autowired
     private ScoreService score;
+    @Autowired
+    private SaveGame saveGame;
 
     public void start(){
         while (true) {
@@ -72,7 +75,6 @@ public class ConsoleUI {
 
 
     private void playGame() {
-
         long count = 1;
         try (Stream<Path> files = Files.list(Paths.get("C:\\Users\\yural\\Desktop\\Mine\\Study TUKE\\Code\\Block Puzzle\\src\\main\\resources\\levels"))) {
             count = files.count();
@@ -107,7 +109,7 @@ public class ConsoleUI {
                 System.out.println("Score was not recorded to database");
                 break;
             }
-
+            saveGame.saveGame(currentPlayer, levelNumber+1);
         }while (level != count);
 
         System.out.println("YOU SOLVED ALL THE LEVELS!!!!");

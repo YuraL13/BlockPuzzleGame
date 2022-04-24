@@ -5,6 +5,10 @@ import java.util.List;
 
 public class Field {
 
+    public int[][] getField() {
+        return field;
+    }
+
     public int[][] field;
     public List<Piece> pieces;
     private final int rowCount;
@@ -61,6 +65,7 @@ public class Field {
         for(Point p : points.getPiece()){
             field[p.x + x][p.y + y] = points.getColor();
         }
+
         return true;
     }
 
@@ -117,7 +122,9 @@ public class Field {
         }
     }
 
-    public String getField(){
+
+
+    public String getFieldText(){
         StringBuilder sb = new StringBuilder();
 
         String output = ".";

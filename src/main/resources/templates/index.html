@@ -20,7 +20,9 @@
 
     </div>
 
-    <div th:replace="fragments::top-scores()" ></div>
+    <h1>Best Players</h1>
+
+    <div th:replace="fragments::top-scores(scores=${scores})" ></div>
 
     <div th:replace="fragments::footer" ></div>
 

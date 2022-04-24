@@ -51,6 +51,14 @@ public class Level {
         return reader.readLevelFromFile();
     }
 
+    public boolean makeMove(Piece piece, int x, int y){
+        var res =  field.putPiece(piece, x, y);
+        if(res){
+            removePiece(piece);
+        }
+        return res;
+    }
+
     public int getLevelCouner() {
         return levelCouner;
     }
