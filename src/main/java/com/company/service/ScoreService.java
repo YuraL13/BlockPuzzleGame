@@ -11,6 +11,9 @@ public interface ScoreService {
     void addScore(Score score);
 
     List<Score> topScores();
+    String getRating();
+    void setRating(String user, int rating);
+
     void startTimer();
     long stopTimer();
 

@@ -101,7 +101,7 @@ public class ConsoleUI {
             System.out.println("TIME: " + time + " seconds");
 
             var levelScore = score.countScore(time, console.getLevel().getField().size());
-
+            System.out.println("BASIcScore");
             System.out.println("Your score for this level is: " + levelScore);
             try {
                 score.addScore(new Score(currentPlayer, level, levelScore, new Date()));

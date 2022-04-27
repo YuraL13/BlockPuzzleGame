@@ -1,5 +1,6 @@
 package com.company.service;
 
+import com.company.entity.Rating;
 import com.company.entity.Score;
 
 import javax.persistence.EntityManager;
@@ -24,6 +25,17 @@ public class ScoreServiceJPA implements ScoreService{
         return a;
     }
 
+    @Override
+    public String getRating(){
+        var rating = entityManager.createQuery("select avg(rating) from Rating").setMaxResults(1).getResultList();
+        return String.valueOf(rating.get(0));
+    }
+
+    @Override
+    public void setRating(String user, int rating){
+        entityManager.persist(new Rating(user, rating));
+    }
+
     private long Time;
 
     public void startTimer(){
@@ -41,14 +53,20 @@ public class ScoreServiceJPA implements ScoreService{
 
     public int countScore(long time, int  basicScore){
 
-        if(time < 10){
-            return Math.round(basicScore *2);
+        if(time < 20){
+            return Math.round(basicScore *4);
+        }
+        else if(time < 30){
+            return (int)Math.round(basicScore*3.75);
+        }
+        else if(time < 45){
+            return (int)Math.round(basicScore*2.65);
         }
         else if(time < 60){
-            return (int)Math.round(basicScore *1.5);
+            return (int)Math.round(basicScore *2);
         }
         else if(time < 120){
-            return (int)Math.round(basicScore *1.25);
+            return (int)Math.round(basicScore *1.5);
         }
         else return basicScore;
 

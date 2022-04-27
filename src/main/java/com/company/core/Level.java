@@ -9,7 +9,21 @@ public class Level {
     private List<Piece> pieces;
     private final Field field;
     private final List<String> input;
+
+    private GameState state;
+
+    public GameState getState() {
+        return state;
+    }
+
+    public void setState(GameState state) {
+        this.state = state;
+    }
     private int levelCouner;
+
+    public int getLevelNumber() {
+        return levelNumber;
+    }
 
     private final int levelNumber;
 
@@ -25,8 +39,8 @@ public class Level {
         input.remove(0);
         input.remove(0);//Removes field sizes from input so only names of pieces are left
 
-
         pieces = generate();
+        this.state = field.getState();
     }
 
     public Level(){
@@ -55,6 +69,9 @@ public class Level {
         var res =  field.putPiece(piece, x, y);
         if(res){
             removePiece(piece);
+        }
+        if(field.isGameFinished()){
+            state = GameState.SOLVED;
         }
         return res;
     }

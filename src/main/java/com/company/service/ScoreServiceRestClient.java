@@ -26,6 +26,18 @@ public class ScoreServiceRestClient implements ScoreService{
         return Arrays.asList(restTemplate.getForEntity(url + "/score", Score[].class).getBody());
     }
 
+    @Override
+    public String getRating() {
+
+        return "";
+    }
+
+    @Override
+    public void setRating(String user, int rating) {
+
+    }
+
+
     private long Time;
 
     @Override

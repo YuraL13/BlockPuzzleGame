@@ -65,7 +65,7 @@ public class Field {
         for(Point p : points.getPiece()){
             field[p.x + x][p.y + y] = points.getColor();
         }
-
+        isGameFinished();
         return true;
     }
 

@@ -64,7 +64,7 @@ img:hover .parent{
     height: 60px;
 }
 
-table:hover{
+table.piece:hover{
     border: 2px solid rgb(30, 145, 30);
 }
 

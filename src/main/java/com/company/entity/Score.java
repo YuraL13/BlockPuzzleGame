@@ -18,7 +18,6 @@ public class Score implements Serializable {
     private Date date;
     private int level;
 
-
     public int getLevel() {
         return level;
     }
