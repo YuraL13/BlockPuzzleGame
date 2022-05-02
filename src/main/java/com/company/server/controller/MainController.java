@@ -34,6 +34,34 @@ public class MainController {
         return "redirect:/";
     }
 
+    @RequestMapping("/logout")
+    public String logout(){
+        loggedUser = null;
+        return "redirect:/";
+    }
+
+    @RequestMapping("/rating/post")
+    public String rating(String rating, String comment){
+
+        var r = Integer.parseInt(rating);
+
+        if(r >= 1 && r <= 5){
+            if(comment != null){
+                scoreService.setRating(loggedUser.getLogin(), r, comment);
+            }
+            scoreService.setRating(loggedUser.getLogin(), r);
+            return "redirect:/rating";
+        }
+        return "rating";
+    }
+
+    @RequestMapping("/rating")
+    public String rating(Model model){
+        model.addAttribute("rating", scoreService.getRating());
+        model.addAttribute("comments", scoreService.getComments());
+        return "rating";
+    }
+
     public User getLoggedUser() {
         return loggedUser;
     }

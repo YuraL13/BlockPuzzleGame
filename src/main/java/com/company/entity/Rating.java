@@ -12,8 +12,21 @@ public class Rating implements Serializable {
     @GeneratedValue
     private int ratingID;
     private String userLogin;
-    private int rating;
+
+    public String getUserLogin() {
+        return userLogin;
+    }
+
+    public String getComment() {
+        return comment;
+    }
+
+    public int getRating() {
+        return rating;
+    }
+
     private String comment;
+    private int rating;
 
     public Rating(){
 

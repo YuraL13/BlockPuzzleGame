@@ -61,17 +61,11 @@ public class PuzzleController {
     }
 
     @RequestMapping("/new")
-    public String newGame(@RequestParam(required = false) String levelNumber,
+    public String newGame(
             Model model){
-        if(levelNumber == null){
-            level = new Level(1);
-        }
-        else{
-            level = new Level(Integer.parseInt(levelNumber));
-        }
-        field = level.getField();
-        prepareModel(model);
-        return "game";
+            level = new Level(levelNumber);
+            field = level.getField();
+        return "redirect:/game";
     }
 
     public String getHtmlPieces(){
@@ -90,9 +84,26 @@ public class PuzzleController {
 
     @RequestMapping(value = "/field", produces = MediaType.TEXT_HTML_VALUE)
     @ResponseBody
-    public String game(@RequestParam(required = false) String row, @RequestParam(required = false) String column){
+    public String game(@RequestParam(required = false) String p,
+                       @RequestParam(required = false) String row,
+                       @RequestParam(required = false) String col){
+        if(p != null && row != null && col != null) {
+            var piece = level.getPieces().get(Integer.parseInt(p));
+            level.makeMove(piece, Integer.parseInt(row), Integer.parseInt(col));
+            field.isGameFinished();
+            field = level.getField();
+        }
 
         return getHtmlField();
+    }
+
+    @RequestMapping(value = "/gamefield")
+    @ResponseBody
+    public String getGame(){
+        StringBuilder sb = new StringBuilder();
+
+        sb.append(getHtmlPieces()).append(getHtmlField());
+        return sb.toString();
     }
 
     private String printPiece(Point[] p){ //Func to print a piece
@@ -132,12 +143,14 @@ public class PuzzleController {
             for (int column = 0; column < field.getColCount(); column++) {
                 //var tile = field.getTile(row, column);
                 sb.append("<td>\n");
+                sb.append(String.format("<a href='/game?p=%d&row=%d&col=%d'>\n", 0, row, column));
                 if(field.getField()[row][column] == 0) {
                     sb.append("<img src='/images/X.png'/>");
                 }
                 else {
                     sb.append("<img src='/images/1.png'/>");
                 }
+                sb.append("</a>\n");
                 sb.append("</td>\n");
             }
             sb.append("</tr>\n");

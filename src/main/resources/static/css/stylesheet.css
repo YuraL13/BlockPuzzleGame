@@ -153,3 +153,138 @@ a{
     -moz-border-radius: 5px;
     border-radius: 5px;
   }
+
+  .example {
+	background: white;
+	margin: 0 auto;
+	max-width: 1100px;
+	padding: 2ch;
+	width: 100%;
+}
+
+/*
+=====
+DEPENDENCES
+=====
+*/
+
+.screen-reader{
+    width: var(--screenReaderWidth, 1px) !important;
+    height: var(--screenReaderHeight, 1px) !important;
+    padding: var(--screenReaderPadding, 0) !important;
+    border: var(--screenReaderBorder, none) !important;
+  
+    position: var(--screenReaderPosition, absolute) !important;
+    clip: var(--screenReaderClip, rect(1px, 1px, 1px, 1px)) !important;
+    overflow: var(--screenReaderOverflow, hidden) !important;
+  }
+  
+  /*
+  =====
+  CORE STYLES
+  =====
+  */
+  
+  .rating{
+    --uiRatingColor: var(--ratingColor, #eee);
+    --uiRatingColorActive: var(--ratingColorActive, #ffcc00);
+  
+    display: var(--ratingDisplay, flex);
+    font-size: var(--ratingSize, 1rem);
+    color: var(--uiRatingColor);
+  }
+      
+  .rating__control:nth-of-type(1):focus ~ .rating__item:nth-of-type(1)::before,
+  .rating__control:nth-of-type(2):focus ~ .rating__item:nth-of-type(2)::before,
+  .rating__control:nth-of-type(3):focus ~ .rating__item:nth-of-type(3)::before,
+  .rating__control:nth-of-type(4):focus ~ .rating__item:nth-of-type(4)::before,
+  .rating__control:nth-of-type(5):focus ~ .rating__item:nth-of-type(5)::before{
+    content: ""; 
+    box-shadow: 0 0 0 var(--ratingOutlineWidth, 4px) var(--uiRatingColorActive);
+  
+    position: absolute;
+    top: -.15em;
+    right: 0;
+    bottom: -.15em;
+    left: 0;
+    z-index: -1;
+  }
+  
+  .rating__item{
+    cursor: pointer;  
+    position: relative;
+  }
+  
+  .rating__item{
+    padding-left: .25em;
+    padding-right: .25em;
+  }
+  
+  .rating__star{
+    display: block;
+    width: 1em;
+    height: 1em;
+  
+    fill: currentColor;
+    stroke: var(--ratingStroke, #222);
+    stroke-width: var(--ratingStrokeWidth, 1px);
+  }
+  
+  .rating:hover,
+  .rating__control:nth-of-type(1):checked ~ .rating__item:nth-of-type(1),
+  .rating__control:nth-of-type(2):checked ~ .rating__item:nth-of-type(-n+2),
+  .rating__control:nth-of-type(3):checked ~ .rating__item:nth-of-type(-n+3),
+  .rating__control:nth-of-type(4):checked ~ .rating__item:nth-of-type(-n+4),
+  .rating__control:nth-of-type(5):checked ~ .rating__item:nth-of-type(-n+5){
+    color: var(--uiRatingColorActive);
+  }
+  
+  .rating__item:hover ~ .rating__item{
+    color: var(--uiRatingColor);
+  }
+  
+  .container {
+  text-align: center;
+  margin-top: 250px;
+}
+
+.button-container {
+  position: relative;
+  width: 120px;
+  height: 40px;
+  display: inline-block;
+  background: black;
+  padding: 4px;
+  border-radius: 12px 3px 12px 3px;
+}
+
+button {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 120px;
+  height: 40px;
+  background: #fff;
+  border: 3px solid black;
+  font-weight: bold;
+  font-family: monospace;
+  font-size: 16px;
+  border-radius: 5px;
+  text-transform: uppercase;
+  letter-spacing: -0.3px;
+  cursor: pointer;
+}
+
+button:focus {
+  outline: none;
+}
+
+button.active {
+  background: mediumspringgreen;
+  color: #fff;
+  transform: translate(-10px, 10px);
+}
+
+.button-container.active {
+  background: white;
+}

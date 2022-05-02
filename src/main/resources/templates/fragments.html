@@ -2,37 +2,77 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <!--/*@thymesVar id="userController" type="sk.tuke.gamestudio.server.controller.UserController"*/-->
 
-<div th:fragment="header" >
-    <div class="header" ><a href="/">Block Puzzle</a></div>
-</div>
-
-<head th:fragment="head-info" >
-    <meta charset="UTF-8">
-    <title>Block puzzle</title>
-    <link rel="stylesheet" href="/css/stylesheet.css"/>
-    <link href="http://fonts.cdnfonts.com/css/arcade-classic" rel="stylesheet">
-</head>
-
-<div th:fragment="footer">
-    <hr/>
-    <div class="footer-text">Created by yurii Levchenko in 2022</div>
-</div>
-
-<div th:fragment="top-scores" >
-    <div class="score" id="default-score">
-        <div>0.</div>
-        <div>Player</div>
-        <div>Level</div>
-        <div>Score</div>
+    <div th:fragment="header" >
+        <div class="header" ><a href="/">Block Puzzle</a></div>
     </div>
 
-    <div class="score" th:each="score: ${scores}" >
-        <div th:text="${scoreStat.index+1}" ></div>
-        <div th:text="${score.getPlayer()}"></div>
-        <div th:text="${score.getLevel()+1}" ></div>
-        <div th:text="${score.getScore()}" ></div>
+    <head th:fragment="head-info" >
+        <meta charset="UTF-8">
+        <title>Block puzzle</title>
+        <link rel="stylesheet" href="/css/stylesheet.css"/>
+        <link href="http://fonts.cdnfonts.com/css/arcade-classic" rel="stylesheet">
+
+        <script src="https://code.jquery.com/jquery-3.6.0.js"
+                integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+
+        <script type="text/javascript">
+            //<![CDATA[
+            $(document).ready(function(){
+                refreshMinefield("/game/field");
+            });
+
+            function refreshMinefield(url) {
+                $.ajax({
+                    url: url,
+                }).done(function (html) {
+                    $("#minefieldFromService").html(html);
+                    //Kedze som nechcel upravit generovnie pola s a href, tak odstranujem atribut href a pridavam click
+                    $("#minefieldFromService a").each(function () {
+                        const url = $(this).attr("href").replace("/game", "/game/field");
+                        $(this).removeAttr("href");
+                        $(this).click(function () {
+                            refreshMinefield(url);
+                        });
+                    })
+                });
+            }
+            //]]>
+        </script>
+
+
+
+    </head>
+
+    <div th:fragment="footer">
+        <hr/>
+        <div class="footer-text">Created by yurii Levchenko in 2022</div>
     </div>
 
-</div>
+    <div th:fragment="top-scores" >
+        <div class="score" id="default-score">
+            <div>0.</div>
+            <div>Player</div>
+            <div>Level</div>
+            <div>Score</div>
+        </div>
+
+        <div class="score" th:each="score: ${scores}" >
+            <div th:text="${scoreStat.index+1}" ></div>
+            <div th:text="${score.getPlayer()}"></div>
+            <div th:text="${score.getLevel()+1}" ></div>
+            <div th:text="${score.getScore()}" ></div>
+        </div>
+
+    </div>
+
+    <div th:replace="comments" >
+        <div class="comments" th:each="comment: ${comments}">
+            <div th:text="${comment.getUserLogin()}"></div>
+            <div th:text="${comment.getRating()}" ></div>
+            <div th:text="${comment.getComment()}" ></div>
+        </div>
+    </div>
+
+
 
 </html>

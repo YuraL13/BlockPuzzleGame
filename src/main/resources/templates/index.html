@@ -8,7 +8,6 @@
 <!--<h1><a href="#">Block Puzzle</a></h1>-->
     <div th:replace="fragments::header" ></div>
 
-    <div class="rating" style="font-size: 20px" th:text="${scoreService.getRating()}" ></div>
 
     <span th:if="not ${@mainController.logged}">
         <form action="/login" method="post">
@@ -20,12 +19,20 @@
 
 
     <span th:if="${@mainController.logged}">
+
         <div class="buttons" >
             <div ontouchstart="">
                 <div class="button">
-                    <a href="/game">Start Game!</a>
+                    <a href="/game/new">Start Game!</a>
                 </div>
             </div>
+          <div class="button-container">
+            <button onclick="window.location.href='/rating';" >Comment&Rate</button>
+          </div>
+
+            <div class="button-container">
+            <button onclick="window.location.href='/logout';" >Logout</button>
+          </div>
 
         </div>
     </span>

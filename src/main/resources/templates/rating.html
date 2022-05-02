@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments::head-info" ></head>
+<body>
+
+<div th:replace="fragments::header" ></div>
+
+<div th:if="not ${@mainController.logged}">
+        <div class="buttons" >
+            <div ontouchstart="">
+                <div class="button">
+                    <a href="/">Login first!</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <span th:if="${@mainController.logged}">
+        <form action="rating/post" method="post" class="rate-form" >
+            Rate game!
+            <br>
+            <input type="text" name="rating"/><br/>
+            <br>
+            Comment!
+            <input type="text" name="comment"/><br/>
+            <input type="submit"/>
+        </form>
+    </span>
+
+<div class="comments" th:each="comment: ${comments}">
+    <div th:text="${comment.getUserLogin()}"></div>
+    <div th:text="${comment.getRating()}" ></div>
+    <div th:text="${comment.getComment()}" ></div>
+</div>
+    <div th:replace="fragments::footer" ></div>
+
+</body>

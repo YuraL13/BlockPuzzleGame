@@ -36,6 +36,17 @@ public class ScoreServiceJPA implements ScoreService{
         entityManager.persist(new Rating(user, rating));
     }
 
+    @Override
+    public void setRating(String user, int rating, String comment) {
+        entityManager.persist(new Rating(user, rating, comment));
+    }
+
+    @Override
+    public List<Rating> getComments(){
+        var coments = entityManager.createQuery("select r from Rating r where r.comment is not null").setMaxResults(15).getResultList();
+        return coments;
+    }
+
     private long Time;
 
     public void startTimer(){

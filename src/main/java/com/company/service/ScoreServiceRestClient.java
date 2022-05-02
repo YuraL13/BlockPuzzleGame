@@ -1,5 +1,6 @@
 package com.company.service;
 
+import com.company.entity.Rating;
 import com.company.entity.Score;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -33,9 +34,20 @@ public class ScoreServiceRestClient implements ScoreService{
     }
 
     @Override
+    public List<Rating> getComments() {
+        return null;
+    }
+
+    @Override
     public void setRating(String user, int rating) {
 
     }
+
+    @Override
+    public void setRating(String user, int rating, String comment) {
+
+    }
+
 
 
     private long Time;
