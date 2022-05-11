@@ -130,13 +130,6 @@ public class PuzzleController {
         return sb.toString();
     }
 
-    @RequestMapping("/addScoreRedirect")
-    public String addScore(@RequestParam(required = true) String size,
-                           @RequestParam(required = true) String level){
-
-        return "redirect:/addScore?size="+size+"&level"+levelNumber;
-    }
-
     public String getHtmlField(){
         StringBuilder sb = new StringBuilder();
 
@@ -178,7 +171,7 @@ public class PuzzleController {
             if (levelN > 3){levelN = 1;}
             level = new Level(levelN);
             field = level.getField();
-
+            this.levelNumber = levelN;
         }
 
         if(p != null && row != null && col != null) {

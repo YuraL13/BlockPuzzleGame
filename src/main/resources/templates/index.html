@@ -5,20 +5,18 @@
 
 <body>
 
-<!--<h1><a href="#">Block Puzzle</a></h1>-->
     <div th:replace="fragments::header" ></div>
-
 
     <span th:if="not ${@mainController.logged}">
         <form class="login" th:action="@{/login}" method="post">
             Login: <br><input class="inp" type="text" name="login"/><br/>
-            Password: <br><input class="inp" type="text" name="password"/><br/>
+            Password: <br><input class="inp" type="password" name="password"/><br/>
             <input class="login-button" type="submit" value="Log in!"/>
+            <button class="login-button" onclick="window.location.href='/register';" >Register</button>
         </form>
     </span>
 
     <span th:if="${@mainController.logged}">
-
         <div class="buttons" >
             <div ontouchstart="">
                 <div class="button">

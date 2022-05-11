@@ -87,6 +87,8 @@ public class MainController {
         System.out.println(star + "   "  + comment);
         var r = Integer.parseInt(star);
 
+        if(comment.isBlank() || comment.isEmpty()) comment = null;
+
         if(r >= 1 && r <= 5){
             if(comment != null){
                 commentService.addScore(new Rating(loggedUser.getLogin(), r, comment));

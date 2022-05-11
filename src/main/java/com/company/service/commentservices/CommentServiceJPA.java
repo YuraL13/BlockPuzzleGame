@@ -20,7 +20,7 @@ public class CommentServiceJPA implements CommentService {
 
     @Override
     public List<Rating> getComments() {
-        return entityManager.createQuery("select r from Rating r where r.comment is not null or r.comment not like ' '").setMaxResults(15).getResultList();
+        return entityManager.createQuery("select r from Rating r where r.comment is not null or r.comment not like ' '").setMaxResults(10).getResultList();
     }
 
     @Override
