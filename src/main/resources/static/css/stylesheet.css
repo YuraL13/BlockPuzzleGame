@@ -1,0 +1,315 @@
+h1 {
+    text-align: center;
+    font-size: 40px;
+    color: rgb(30, 145, 30);;
+}
+
+a{
+    text-decoration: none;
+}
+
+body{
+    background-image: url("../images/bg.jpg");
+    font-family: 'Maven Pro', sans-serif;
+    text-align: center;
+    color: aliceblue;
+    position: relative;
+    height: 200%;
+    font-family: 'ArcadeClassic', sans-serif;
+}
+
+.score{
+    font-size: 40px;
+    color: aliceblue;
+}
+
+.score > div{
+    /* border-bottom: 3px white solid; */
+
+    padding-top: 20px ;
+    width: 25%;
+    float: left;
+    height: 50px;
+}
+
+#default-score > div{
+    border-bottom: 3px white solid;
+}
+
+.score > div:first-of-type{
+    text-align: left;
+}
+
+.field{
+    display: flex;
+    justify-content: center;
+}
+
+img{
+    height: 50px;
+}
+
+.piece{
+    margin: 20px;
+    float: left;
+}
+
+.piece:hover{
+    margin: 20px;
+    float: left;
+    height: 120%;
+}
+
+img:hover .parent{
+    height: 60px;
+}
+
+table.piece:hover{
+    border: 2px solid rgb(30, 145, 30);
+}
+
+.pieces_list{
+    margin: auto;
+    display: flex;
+    justify-content: center;
+}
+
+.togame-button{
+    height: 200px;
+    width: 500px;
+    color: black;
+}
+
+.footer-text{
+    justify-content: baseline;
+    bottom: 0px;
+}
+
+a{
+    text-decoration: none;
+}
+
+.header > a{
+    font-size: 60px;
+    color: rgb(30, 145, 30);
+}
+
+.header{
+    font-family: 'ArcadeClassic', sans-serif;
+}
+
+
+.button{
+    position:relative;
+    display:inline-block;
+    margin:20px;
+  }
+  
+  .button a{
+    color:white;
+    font-family: 'ArcadeClassic', sans-serif;
+    font-weight:bold;
+    font-size:36px;
+    text-align: center;
+    text-decoration:none;
+    background-color:#FFA12B;
+    display:block;
+    position:relative;
+    padding:20px 40px;
+    
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    text-shadow: 0px 1px 0px #000;
+    filter: dropshadow(color=#000, offx=0px, offy=1px);
+    
+    -webkit-box-shadow:inset 0 1px 0 #FFE5C4, 0 10px 0 #915100;
+    -moz-box-shadow:inset 0 1px 0 #FFE5C4, 0 10px 0 #915100;
+    box-shadow:inset 0 1px 0 #FFE5C4, 0 10px 0 #915100;
+    
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+  }
+  
+  .button a:active{
+    top:10px;
+    background-color:#F78900;
+    
+    -webkit-box-shadow:inset 0 1px 0 #FFE5C4, inset 0 -3px 0 #915100;
+    -moz-box-shadow:inset 0 1px 0 #FFE5C4, inset 0 -3pxpx 0 #915100;
+    box-shadow:inset 0 1px 0 #FFE5C4, inset 0 -3px 0 #915100;
+  }
+  
+  .button:after{
+    content:"";
+    height:100%;
+    width:100%;
+    padding:4px;
+    position: absolute;
+    bottom:-15px;
+    left:-4px;
+    z-index:-1;
+    background-color:#2B1800;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+  }
+
+  .example {
+	background: white;
+	margin: 0 auto;
+	max-width: 1100px;
+	padding: 2ch;
+	width: 100%;
+}
+
+/*
+=====
+DEPENDENCES
+=====
+*/
+
+.screen-reader{
+    width: var(--screenReaderWidth, 1px) !important;
+    height: var(--screenReaderHeight, 1px) !important;
+    padding: var(--screenReaderPadding, 0) !important;
+    border: var(--screenReaderBorder, none) !important;
+  
+    position: var(--screenReaderPosition, absolute) !important;
+    clip: var(--screenReaderClip, rect(1px, 1px, 1px, 1px)) !important;
+    overflow: var(--screenReaderOverflow, hidden) !important;
+  }
+  
+  /*
+  =====
+  CORE STYLES
+  =====
+  */
+  
+  .rating{
+    --uiRatingColor: var(--ratingColor, #eee);
+    --uiRatingColorActive: var(--ratingColorActive, #ffcc00);
+  
+    display: var(--ratingDisplay, flex);
+    font-size: var(--ratingSize, 1rem);
+    color: var(--uiRatingColor);
+  }
+      
+  .rating__control:nth-of-type(1):focus ~ .rating__item:nth-of-type(1)::before,
+  .rating__control:nth-of-type(2):focus ~ .rating__item:nth-of-type(2)::before,
+  .rating__control:nth-of-type(3):focus ~ .rating__item:nth-of-type(3)::before,
+  .rating__control:nth-of-type(4):focus ~ .rating__item:nth-of-type(4)::before,
+  .rating__control:nth-of-type(5):focus ~ .rating__item:nth-of-type(5)::before{
+    content: ""; 
+    box-shadow: 0 0 0 var(--ratingOutlineWidth, 4px) var(--uiRatingColorActive);
+  
+    position: absolute;
+    top: -.15em;
+    right: 0;
+    bottom: -.15em;
+    left: 0;
+    z-index: -1;
+  }
+  
+  .rating__item{
+    cursor: pointer;  
+    position: relative;
+  }
+  
+  .rating__item{
+    padding-left: .25em;
+    padding-right: .25em;
+  }
+  
+  .rating__star{
+    display: block;
+    width: 1em;
+    height: 1em;
+  
+    fill: currentColor;
+    stroke: var(--ratingStroke, #222);
+    stroke-width: var(--ratingStrokeWidth, 1px);
+  }
+  
+  .rating:hover,
+  .rating__control:nth-of-type(1):checked ~ .rating__item:nth-of-type(1),
+  .rating__control:nth-of-type(2):checked ~ .rating__item:nth-of-type(-n+2),
+  .rating__control:nth-of-type(3):checked ~ .rating__item:nth-of-type(-n+3),
+  .rating__control:nth-of-type(4):checked ~ .rating__item:nth-of-type(-n+4),
+  .rating__control:nth-of-type(5):checked ~ .rating__item:nth-of-type(-n+5){
+    color: var(--uiRatingColorActive);
+  }
+  
+  .rating__item:hover ~ .rating__item{
+    color: var(--uiRatingColor);
+  }
+  
+  .container {
+  text-align: center;
+  margin-top: 250px;
+}
+
+.button-container {
+  position: relative;
+  width: 120px;
+  height: 40px;
+  display: inline-block;
+  background: black;
+  padding: 4px;
+  border-radius: 12px 3px 12px 3px;
+}
+
+button {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 120px;
+  height: 40px;
+  background: #fff;
+  border: 3px solid black;
+  font-weight: bold;
+  font-family: monospace;
+  font-size: 16px;
+  border-radius: 5px;
+  text-transform: uppercase;
+  letter-spacing: -0.3px;
+  cursor: pointer;
+}
+
+button:focus {
+  outline: none;
+}
+
+button.active {
+  background: mediumspringgreen;
+  color: #fff;
+  transform: translate(-10px, 10px);
+}
+
+.button-container.active {
+  background: white;
+}
+
+
+/* Enter form and button */
+
+.inp{
+  padding-top: 10px ;
+  height: 25px;
+  border-radius: 3px;
+}
+
+
+
+.login-button{
+  width: 120px;
+  height: 40px;
+  background: #fff;
+  border: 3px solid black;
+  font-weight: bold;
+  font-family: monospace;
+  font-size: 16px;
+  border-radius: 5px;
+  text-transform: uppercase;
+  letter-spacing: -0.3px;
+  cursor: pointer;
+}

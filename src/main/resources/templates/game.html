@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.thymeleaf.org ">
+
+<head th:replace="fragments::head-info" > </head>
+
+<body>
+
+<div th:replace="fragments::header" ></div>
+<div class="content_wrapper" >
+
+    <div th:if="${game.getState().toString() == 'SOLVED'}" >
+    <!--<button class="togame-button" onclick="window.location.href='/game';" ></button>-->
+        <div class="buttons" >
+            <div ontouchstart="">
+                <div class="button">
+<!--                    TODO Check for level limits -->
+                    <a th:href="@{/game(levelNumber=${game.getLevelNumber()+1})}">Next Level!</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="pieces_list" th:utext="${pieces}" ></div>
+
+    <div class="button-container">
+        <button onclick="window.location.href='/game/new';" >Reset level</button>
+    </div>
+
+    <div class="field">
+        <span th:utext="${htmlField}" ></span>
+    </div>
+
+<!--    <h2>Mine field from service</h2>-->
+<!--    <div class="field" id="minefieldFromService">-->
+<!--    </div>-->
+
+    <div th:replace="fragments::footer" ></div>
+
+
+</div>
+</body>

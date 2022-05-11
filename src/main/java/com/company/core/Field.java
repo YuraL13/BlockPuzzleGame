@@ -5,6 +5,10 @@ import java.util.List;
 
 public class Field {
 
+    public int[][] getField() {
+        return field;
+    }
+
     public int[][] field;
     public List<Piece> pieces;
     private final int rowCount;
@@ -61,6 +65,7 @@ public class Field {
         for(Point p : points.getPiece()){
             field[p.x + x][p.y + y] = points.getColor();
         }
+        isGameFinished();
         return true;
     }
 
@@ -115,6 +120,38 @@ public class Field {
             }
             System.out.println();
         }
+    }
+
+
+
+    public String getFieldText(){
+        StringBuilder sb = new StringBuilder();
+
+        String output = ".";
+        System.out.print("   ");
+        for(int i = 0; i < colCount; i++){
+            System.out.print(i + " ");//Not the best way to do thi but it works
+            sb.append(i).append(" ");
+        }
+
+        System.out.println();
+        sb.append("\n");
+        for (int i = 0; i < rowCount; i++){
+            System.out.print(i + "| ");
+            for(int j = 0; j < colCount; j++){
+                if(field[i][j] != 0){
+                    output = String.valueOf(field[i][j]);
+                }
+                else {
+                    output = ".";
+                }
+                System.out.print(output + " ");
+                sb.append(output).append(" ");
+            }
+            System.out.println();
+            sb.append("\n");
+        }
+        return sb.toString();
     }
 
     public void clearFiled(){

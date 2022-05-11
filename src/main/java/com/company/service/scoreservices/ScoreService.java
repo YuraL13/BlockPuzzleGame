@@ -1,5 +1,6 @@
-package com.company.service;
+package com.company.service.scoreservices;
 
+import com.company.entity.Rating;
 import com.company.entity.Score;
 
 import java.util.List;
@@ -11,6 +12,15 @@ public interface ScoreService {
     void addScore(Score score);
 
     List<Score> topScores();
+    String getRating();
+    List<Rating> getComments();
+
+    default void setRating(String user, int rating) {
+
+    }
+
+    void setRating(String user, int rating, String comment);
+
     void startTimer();
     long stopTimer();
 

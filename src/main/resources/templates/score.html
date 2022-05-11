@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.thymeleaf.org ">
+
+<head th:replace="fragments::head-info" ></head>
+
+<body>
+
+<div th:replace="fragments::header" ></div>
+<h2>Best scores</h2>
+
+<div class="score" id="default-score">
+    <div>0.</div>
+    <div>Player</div>
+    <div>Level</div>
+    <div>Score</div>
+</div>
+
+<div class="score" th:each="score: ${scores}" >
+    <div th:text="${scoreStat.index+1}" ></div>
+    <div th:text="${score.getPlayer()}"></div>
+    <div th:text="${score.getLevel()+1}" ></div>
+    <div th:text="${score.getScore()}" ></div>
+</div>
+
+</body>

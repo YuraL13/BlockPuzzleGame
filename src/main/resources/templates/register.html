@@ -1,0 +1,50 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments::head-info" ></head>
+
+<script>
+    function ValidateEmail(input) {
+
+  var validRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+
+  if (input.value.match(validRegex)) {
+
+    alert("Valid email address!");
+
+    document.form1.text1.focus();
+
+    return true;
+
+  } else {
+
+    alert("Invalid email address!");
+
+    document.form1.text1.focus();
+
+    return false;
+
+  }
+  }
+</script>
+
+<body>
+
+    <div th:replace="fragments::header" ></div>
+
+    <h1 th:if="${regErr == null}" style="color: white" >Such user does not exist!</h1>
+    <h2 th:if="${regErr == null}" >Create an account!</h2>
+
+    <h2 th:if="${regErr != null}" th:text="${regErr}" ></h2>
+    <form class="login" th:action="@{/register}" method="post">
+        Login: <br><input class="inp" type="text" name="login"/><br/>
+        Email: <br><input class="inp" type="email" name="email" onclick="ValidateEmail(document.form1.text1)"/><br/>
+        Password: <br><input class="inp" type="password" name="password"/><br/>
+        <input class="login-button" type="submit" value="Register"/>
+    </form>
+
+    <div th:replace="fragments::footer" ></div>
+
+
+</body>
+</html>

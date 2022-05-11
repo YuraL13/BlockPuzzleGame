@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments::head-info" ></head>
+<body>
+
+<div th:replace="fragments::header" ></div>
+
+<h2>Current game rating is </h2>
+<div th:text="${avgRating}" style="font-size: 50px;" ></div>
+
+    <div th:if="not ${@mainController.logged}">
+        <div class="buttons" >
+            <div ontouchstart="">
+                <div class="button">
+                    <a href="/">Login first!</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <span th:if="${@mainController.logged}">
+        <form action="#" th:action="@{rating/post}" method="post" class="rate-form" >
+        <div class="title">
+            <h1>Rate<span> Game</span></h1>
+        </div>
+        <div class="stars">
+            <input class="star star-5" id="star-5" type="radio" name="star" value="5"/>
+            <label class="star star-5" for="star-5"></label>
+            <input class="star star-4" id="star-4" type="radio" name="star" value="4"/>
+            <label class="star star-4" for="star-4"></label>
+            <input class="star star-3" id="star-3" type="radio" name="star" value="3"/>
+            <label class="star star-3" for="star-3"></label>
+            <input class="star star-2" id="star-2" type="radio" name="star" value="2"/>
+            <label class="star star-2" for="star-2"></label>
+            <input class="star star-1" id="star-1" type="radio" name="star" value="1"/>
+            <label class="star star-1" for="star-1"></label>
+
+            <textarea class="inp comment-inp" placeholder="Your comment goes here!" type="text" name="comment"></textarea><br/>
+            <input class="login-button" value="Submit" type="submit"/>
+        </div>
+        </form>
+    </span>
+
+<div class="default-comment">
+    <div class="comment-wrap default-comment">
+        <div class="user" >Username</div>
+        <div class="rate" >%</div>
+        <div class="comment" >Comment</div>
+    </div>
+</div>
+
+<div class="comments">
+    <div class="comment-wrap" th:each="comment: ${comments}">
+        <div class="user" th:text="${comment.getUserLogin()}"></div>
+        <div class="rate" th:text="${comment.getRating()}" ></div>
+        <div class="comment" th:text="${comment.getComment()}" ></div>
+    </div>
+</div>
+    <div th:replace="fragments::footer" ></div>
+
+</body>
