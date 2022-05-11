@@ -1,4 +1,4 @@
-package com.company.service;
+package com.company.service.scoreservices;
 
 import com.company.entity.Rating;
 import com.company.entity.Score;
@@ -9,7 +9,7 @@ import org.springframework.web.client.RestTemplate;
 import java.util.Arrays;
 import java.util.List;
 
-public class ScoreServiceRestClient implements ScoreService{
+public class ScoreServiceRestClient implements ScoreService {
 
     @Value("${remote.server.api}")
     private String url;

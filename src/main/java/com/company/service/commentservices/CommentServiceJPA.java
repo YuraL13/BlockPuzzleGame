@@ -1,4 +1,4 @@
-package com.company.service;
+package com.company.service.commentservices;
 
 import com.company.entity.Rating;
 
@@ -8,7 +8,7 @@ import javax.transaction.Transactional;
 import java.util.List;
 
 @Transactional
-public class CommentServiceJPA implements CommentService{
+public class CommentServiceJPA implements CommentService {
 
     @PersistenceContext
     EntityManager entityManager;

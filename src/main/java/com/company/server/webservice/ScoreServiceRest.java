@@ -1,7 +1,7 @@
 package com.company.server.webservice;
 
 import com.company.entity.Score;
-import com.company.service.ScoreService;
+import com.company.service.scoreservices.ScoreService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

@@ -43,4 +43,9 @@ public class Rating implements Serializable {
         this.comment = comment;
     }
 
+    public Rating(String user, String comment){
+        this.userLogin = user;
+        this.comment = comment;
+    }
+
 }

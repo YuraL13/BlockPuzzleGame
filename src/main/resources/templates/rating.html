@@ -7,7 +7,7 @@
 <div th:replace="fragments::header" ></div>
 
 <h2>Current game rating is </h2>
-<div th:text="${avgRating}" style="font-size: 30px" ></div>
+<div th:text="${avgRating}" style="font-size: 50px;" ></div>
 
     <div th:if="not ${@mainController.logged}">
         <div class="buttons" >
@@ -36,9 +36,7 @@
             <input class="star star-1" id="star-1" type="radio" name="star" value="1"/>
             <label class="star star-1" for="star-1"></label>
 
-            <h2>Comment!</h2>
-            <br>
-            <input class="inp comment-inp" placeholder="Your comment goes here!" type="text" name="comment"/><br/>
+            <textarea class="inp comment-inp" placeholder="Your comment goes here!" type="text" name="comment"></textarea><br/>
             <input class="login-button" value="Submit" type="submit"/>
         </div>
         </form>

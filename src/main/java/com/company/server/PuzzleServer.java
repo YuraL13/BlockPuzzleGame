@@ -1,6 +1,14 @@
 package com.company.server;
 
 import com.company.service.*;
+import com.company.service.commentservices.CommentService;
+import com.company.service.commentservices.CommentServiceJPA;
+import com.company.service.scoreservices.ScoreService;
+import com.company.service.scoreservices.ScoreServiceJPA;
+import com.company.service.userservices.CurrentPlayer;
+import com.company.service.userservices.CurrentPlayerImp;
+import com.company.service.userservices.UserService;
+import com.company.service.userservices.UserServiceJPA;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
@@ -25,4 +33,10 @@ public class PuzzleServer {
 
     @Bean
     public CommentService commentService(){return new CommentServiceJPA();}
+
+    @Bean
+    public UserService userService(){return new UserServiceJPA();}
+
+    @Bean
+    public CurrentPlayer currentPlayer(){ return new CurrentPlayerImp();}
 }

@@ -1,4 +1,4 @@
-package com.company.service;
+package com.company.service.scoreservices;
 
 import com.company.entity.Rating;
 import com.company.entity.Score;

@@ -1,4 +1,4 @@
-package com.company.service;
+package com.company.service.scoreservices;
 
 import com.company.entity.Rating;
 import com.company.entity.Score;
@@ -9,7 +9,7 @@ import javax.transaction.Transactional;
 import java.util.List;
 
 @Transactional
-public class ScoreServiceJPA implements ScoreService{
+public class ScoreServiceJPA implements ScoreService {
 
     @PersistenceContext
     private EntityManager entityManager;

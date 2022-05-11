@@ -10,13 +10,12 @@
 
 
     <span th:if="not ${@mainController.logged}">
-        <form class="login" action="/login" method="post">
+        <form class="login" th:action="@{/login}" method="post">
             Login: <br><input class="inp" type="text" name="login"/><br/>
-            Password: <br><input class="inp" type="password" name="password"/><br/>
+            Password: <br><input class="inp" type="text" name="password"/><br/>
             <input class="login-button" type="submit" value="Log in!"/>
         </form>
     </span>
-
 
     <span th:if="${@mainController.logged}">
 

@@ -5,7 +5,7 @@ import com.company.core.Level;
 import com.company.core.Piece;
 import com.company.entity.Score;
 import com.company.service.SaveGame;
-import com.company.service.ScoreService;
+import com.company.service.scoreservices.ScoreService;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.awt.*;

@@ -2,8 +2,11 @@ package com.company.server.controller;
 
 import com.company.consoleui.ConsoleUI;
 import com.company.core.Field;
+import com.company.core.GameState;
 import com.company.core.Level;
-import com.company.service.ScoreService;
+import com.company.entity.Score;
+import com.company.service.scoreservices.ScoreService;
+import com.company.service.userservices.CurrentPlayer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.http.MediaType;
@@ -15,6 +18,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.context.WebApplicationContext;
 
 import java.awt.*;
+import java.io.FileNotFoundException;
+import java.util.Date;
 
 @Controller
 @Scope(WebApplicationContext.SCOPE_SESSION)
@@ -29,12 +34,15 @@ public class PuzzleController {
     @Autowired
     private ScoreService scoreService;
 
+    @Autowired
+    private CurrentPlayer currentPlayer;
+
     @RequestMapping
     public String getState(@RequestParam(required = false) String levelNumber,
                            @RequestParam(required = false) String p,
                            @RequestParam(required = false) String row,
                            @RequestParam(required = false) String col,
-            Model model){
+            Model model) throws FileNotFoundException {
 
         processCommand(levelNumber, p, row, col);
         prepareModel(model);
@@ -164,17 +172,22 @@ public class PuzzleController {
 
     }
 
-    private void processCommand(String levelNumber, String p, String row, String col){
-        if(levelNumber!=null){
-            level = new Level(Integer.parseInt(levelNumber));
+    private void processCommand(String levelNumber, String p, String row, String col) throws FileNotFoundException {
+        if(levelNumber!=null && p == null){
+            var levelN = Integer.parseInt(levelNumber);
+            if (levelN > 3){levelN = 1;}
+            level = new Level(levelN);
             field = level.getField();
+
         }
 
         if(p != null && row != null && col != null) {
             var piece = level.getPieces().get(Integer.parseInt(p));
             level.makeMove(piece, Integer.parseInt(row), Integer.parseInt(col));
             field.isGameFinished();
-
+            if(field.getState() == GameState.SOLVED){
+                scoreService.addScore(new Score(currentPlayer.getPlayer(), level.getLevelNumber()-1, field.size(), new Date()));
+            }
         }
     }
 
