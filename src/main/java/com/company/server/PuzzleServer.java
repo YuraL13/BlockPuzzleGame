@@ -1,9 +1,6 @@
 package com.company.server;
 
-import com.company.service.SaveGame;
-import com.company.service.SaveGameJPA;
-import com.company.service.ScoreService;
-import com.company.service.ScoreServiceJPA;
+import com.company.service.*;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
@@ -26,4 +23,6 @@ public class PuzzleServer {
     @Bean
     public SaveGame saveGame(){return new SaveGameJPA();}
 
+    @Bean
+    public CommentService commentService(){return new CommentServiceJPA();}
 }

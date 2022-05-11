@@ -36,16 +36,7 @@ public class PuzzleController {
                            @RequestParam(required = false) String col,
             Model model){
 
-        if(levelNumber!=null){
-            level = new Level(Integer.parseInt(levelNumber));
-            field = level.getField();
-        }
-
-        if(p != null && row != null && col != null) {
-            var piece = level.getPieces().get(Integer.parseInt(p));
-            level.makeMove(piece, Integer.parseInt(row), Integer.parseInt(col));
-            field.isGameFinished();
-        }
+        processCommand(levelNumber, p, row, col);
         prepareModel(model);
         return "game";
     }
@@ -72,8 +63,13 @@ public class PuzzleController {
         StringBuilder sb = new StringBuilder();
         var pieces = level.getPieces();
 
+
+        String first = "style='border: 2px solid white'";
         for (int i = 0; i < pieces.size(); i++) {
-            sb.append("<div class='piece' >");
+            if(i!=0){
+                first = "";
+            }
+            sb.append("<div "+ first +"  class='piece' >");
             sb.append("<div style='font-size: 30px;' >" + i +"</div>");
             sb.append(printPiece(pieces.get(i).getPiece()));
             sb.append("</div>");
@@ -97,15 +93,6 @@ public class PuzzleController {
         return getHtmlField();
     }
 
-    @RequestMapping(value = "/gamefield")
-    @ResponseBody
-    public String getGame(){
-        StringBuilder sb = new StringBuilder();
-
-        sb.append(getHtmlPieces()).append(getHtmlField());
-        return sb.toString();
-    }
-
     private String printPiece(Point[] p){ //Func to print a piece
         StringBuilder sb = new StringBuilder();
         //Creates 2D array with blanc spaces and then replaces right coordinates with X
@@ -120,7 +107,8 @@ public class PuzzleController {
         for (Point a : p){
             arr[a.x][a.y] = "<img src='images/1.png'/>";
         }
-        sb.append("<table class='piece' >\n");
+
+        sb.append("<table class='piece'>\n");
         for(int i = 0; i < arr.length; i++){
             sb.append("<tr>\n");
             for (int j = 0; j < arr.length; j++){
@@ -132,6 +120,13 @@ public class PuzzleController {
         }
         sb.append("</table>\n");
         return sb.toString();
+    }
+
+    @RequestMapping("/addScoreRedirect")
+    public String addScore(@RequestParam(required = true) String size,
+                           @RequestParam(required = true) String level){
+
+        return "redirect:/addScore?size="+size+"&level"+levelNumber;
     }
 
     public String getHtmlField(){
@@ -161,12 +156,26 @@ public class PuzzleController {
 
     }
 
-    public void prepareModel(Model model){
+    private void prepareModel(Model model){
         model.addAttribute("htmlField", getHtmlField());
         model.addAttribute("pieces", getHtmlPieces());
         model.addAttribute("scores", scoreService.topScores());
         model.addAttribute("game", level);
 
+    }
+
+    private void processCommand(String levelNumber, String p, String row, String col){
+        if(levelNumber!=null){
+            level = new Level(Integer.parseInt(levelNumber));
+            field = level.getField();
+        }
+
+        if(p != null && row != null && col != null) {
+            var piece = level.getPieces().get(Integer.parseInt(p));
+            level.makeMove(piece, Integer.parseInt(row), Integer.parseInt(col));
+            field.isGameFinished();
+
+        }
     }
 
 }
